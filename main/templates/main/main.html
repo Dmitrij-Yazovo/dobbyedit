@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+
+<body>
+    <div class='maindobby'>
+        <div class="nv">
+            <div class="navleft">
+                <h1>
+                    <a href="{%url 'main:main' %}">DOBBYEDIT</a>
+                </h1>
+            </div>
+            {% comment %} <div class="navcenter"></div> {% endcomment %}
+            <div class="navright">
+                <li class=nav_item>    
+                    <a href="{%url 'main:main' %}">영상편집</a>
+                </li>
+                <li class="divider"></li>
+                <li class=nav_item>    
+                    <a href="{%url 'main:main' %}">게시판</a>
+                </li>
+                <li class="divider"></li>
+                <li class=nav_item>    
+                    <a href="{%url 'main:main' %}">MY</a>
+                </li>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="menu-button">
+            <div class="row1">
+                <div>
+                    <strong>Our Service</strong>
+                </div>
+            </div>
+            <div class="row2">
+                <button class="bt1" onclick="location.href='{%url 'main:main' %}'">
+                    <strong>영상편집</strong>
+                </button>
+                <button class="bt2" onclick="location.href='{%url 'main:main' %}'">
+                    <div>
+                        <strong>게시판</strong>
+                    </div>
+                </button>
+                <button class="bt3" onclick="location.href='{%url 'main:main' %}'">
+                    <div>
+                        <strong>My page</strong>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="aboutus">
+        <div class="intro">
+            <div class="row1">
+                <div>
+                    <strong>About us</strong>
+                </div>
+            </div>
+            <div class="row2">
+                <div class="container">
+                    <img src='/static/assets/about.png' style="width: 700px; min-width: 140px;">
+                </div>
+                <div>
+                </div>    
+            </div>
+        </div>
+    </div>
+    <div class="foot">
+        <div class="footleft">
+            <h1>
+                <strong>DOBBYEDIT</strong>
+            </h1>
+        </div>
+        <div class="footright">
+            <div class='copyright'>
+                <h4>
+                    <strong>Contact webmaster for more information. 010-지기지기-기용기용</strong>
+                </h4>
+            </div>
+            <button class="footbtn1" onclick="location.href='{%url 'main:main' %}'">
+            </button>
+            <button class="footbtn2" onclick="location.href='{%url 'main:main' %}'">
+            </button>
+        </div>
+    </div>  
+</body>
+</html>
