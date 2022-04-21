@@ -8,5 +8,4 @@ urlpatterns = [
     path('loading/', views.loading, name='loading'), 
     path('result/', views.result, name='result'),    
     path('fun/', views.fun, name='fun'),    
-    # path('createtest/', views.create_sub, name='create_sub'),    
 ]

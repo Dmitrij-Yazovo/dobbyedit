@@ -21,15 +21,15 @@
             {% comment %} <div class="navcenter"></div> {% endcomment %}
             <div class="navright">
                 <li class=nav_item>    
-                    <a href="{%url 'main:main' %}">영상편집</a>
+                    <a href="{%url 'dobby:edit' %}">영상편집</a>
                 </li>
                 <li class="divider"></li>
                 <li class=nav_item>    
-                    <a href="{%url 'main:main' %}">게시판</a>
+                    <a href="{%url 'board:postlist' %}">게시판</a>
                 </li>
                 <li class="divider"></li>
                 <li class=nav_item>    
-                    <a href="{%url 'main:main' %}">MY</a>
+                    <a href="{%url 'main:my' %}">MY</a>
                 </li>
             </div>
         </div>
@@ -42,15 +42,15 @@
                 </div>
             </div>
             <div class="row2">
-                <button class="bt1" onclick="location.href='{%url 'main:main' %}'">
+                <button class="bt1" onclick="location.href='{%url 'dobby:edit' %}'">
                     <strong>영상편집</strong>
                 </button>
-                <button class="bt2" onclick="location.href='{%url 'main:main' %}'">
+                <button class="bt2" onclick="location.href='{%url 'board:postlist' %}'">
                     <div>
                         <strong>게시판</strong>
                     </div>
                 </button>
-                <button class="bt3" onclick="location.href='{%url 'main:main' %}'">
+                <button class="bt3" onclick="location.href='{%url 'main:my' %}'">
                     <div>
                         <strong>My page</strong>
                     </div>

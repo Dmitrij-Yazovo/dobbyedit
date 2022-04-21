@@ -4,7 +4,8 @@ from django.utils import timezone
 from django.contrib import auth
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.hashers import check_password 
-from .models import Member
+from main.models import Member
+from dobby.models import File
 
 # HOME
 def main(request):
@@ -57,6 +58,9 @@ def logout(request):
     return render(request, "main/login.html")
 
 
+# MY PAGE
 def my(request):
-
-    return render(request,"main/my.html")
+    
+    files = File.objects.all()
+    
+    return render(request,"main/my.html", {'files':files} )

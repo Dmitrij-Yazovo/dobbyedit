@@ -16,7 +16,7 @@ def loading(request):
 
 
 def result(request):
-    
+
     return render(request,"dobby/result.html")
 
 def fun(request):
@@ -51,4 +51,4 @@ def fun(request):
 #         subtitle_generator(txt_pth,video_pth)
         
 #     return redirect("/dobby/result/")
-    
+   

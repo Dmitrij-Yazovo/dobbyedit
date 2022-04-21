@@ -136,7 +136,7 @@ body{
         <strong>게시판</strong>
     </div>
     <form class="row g-3">
-        <p>총 0건의 게시글이 있습니다.</p>
+        <p>총 {{count}}건의 게시글이 있습니다.</p>
  
          <select class="form-select" aria-label="Default select example">
             <option selected>제목</option>
@@ -173,7 +173,7 @@ body{
         </tbody>
     </table>
     <div class="col-auto">
-        <button type="submit" class="btn btn-secondary" onclick="location.href='../postlist/write'"
+        <button type="submit" class="btn btn-secondary" onclick="location.href='{%url 'board:write' %}'"
         style="background-color: rgb(110, 80, 41);border-color: rgb(110, 80, 41);">글쓰기</button>
       </div>
  

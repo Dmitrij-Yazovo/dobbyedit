@@ -92,7 +92,7 @@ DATABASES = {
         'PORT': 3306,
     }
 }
-DATABASE_ROUTERS = ['main.router.DBRouter', 'board.router.DBRouter']
+DATABASE_ROUTERS = ['main.router.DBRouter', 'board.router.DBRouter', 'dobby.router.DBRouter']
 
 
 LOGGING = {
