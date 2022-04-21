@@ -1,0 +1,215 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fun</title>
+    <link rel="stylesheet" href="{% static 'css/fun.css' %}">
+
+    <style>
+        #modal.modal-overlay {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: ;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(1.5px);
+            -webkit-backdrop-filter: blur(1.5px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        #modal .modal-window {
+            background: rgba( 69, 139, 197, 0.70 );
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+            backdrop-filter: blur( 13.5px );
+            -webkit-backdrop-filter: blur( 13.5px );
+            border-radius: 10px;
+            border: 1px solid rgba( 255, 255, 255, 0.18 );
+            width: 1400px;
+            height: 500px;
+            position: relative;
+            top: -100px;
+            padding: 10px;
+        }
+        #modal .title {
+            padding-left: 10px;
+            display: inline;
+            text-shadow: 1px 1px 2px gray;
+            color: white;
+            
+        }
+        #modal .title h2 {
+            display: inline;
+        }
+        #modal .close-area {
+            display: inline;
+            float: right;
+            padding-right: 10px;
+            cursor: pointer;
+            text-shadow: 1px 1px 2px gray;
+            color: white;
+        }
+        
+        #modal .content {
+            margin-top: 20px;
+            padding: 0px 10px;
+            text-shadow: 1px 1px 2px gray;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='maindobby'>
+        <div class="nv">
+            <div class="navleft">
+                <h1>
+                    <a href="{%url 'main:main' %}">DOBBYEDIT</a>
+                </h1>
+            </div>
+            <div class="navright">
+                <li class=nav_item>    
+                    <a href="{%url 'dobby:edit' %}">영상편집</a>
+                </li>
+                <li class="divider"></li>
+                <li class=nav_item>    
+                    <a href="{%url 'main:main' %}">게시판</a>
+                </li>
+                <li class="divider"></li>
+                <li class=nav_item>    
+                    <a href="{%url 'main:my' %}">MY</a>
+                </li>
+            </div>
+        </div>
+        <div class="title">
+            <h1>
+                영상편집을 성공하여 도비를 해방시켜주세요!
+            </h1>
+        </div>
+    </div>
+    <div class="content">
+        <div class="fun-button">
+            <form action="." method="POST">
+                {% csrf_token %} 
+                <div class="row1">
+                    {% comment %} <button class="bt1" onclick="location.href='{%url 'main:main' %}'"> {% endcomment %}
+                        <input class="bt1" type="submit" name="create" value="Shorts 영상 만들기" class="btn btn-success"> 
+                        <input class="bt2" type="submit" name="create" value="제목 추천" class="btn btn-success"> 
+                        <input class="bt3" type="submit" name="create" value="자막 넣기" class="btn btn-success"> 
+                </div>
+                <div class="row2">
+                        {% comment %} <strong>Shorts 영상 만들기</strong> {% endcomment %}
+                        <input class="bt4" type="submit" name="filter" value="비속어 필터링" class="btn btn-success"> 
+                        <input class="bt5" type="submit" name="filter" value="썸네일 추천" class="btn btn-success"> 
+                        {% comment %} </button>
+                        <button class="bt2" onclick="location.href='{%url 'main:main' %}'">
+                            <div>
+                                <strong>제목 추천</strong>
+                            </div>
+                        </button>
+                        <button class="bt3" onclick="location.href='{%url 'main:main' %}'">
+                            <div>
+                                <strong>자막 넣기</strong>
+                            </div>
+                        </button>
+                </div> {% endcomment %}
+            </form>
+                {% comment %} <div id="container">
+                    <h2>Lorem Ipsum</h2>
+                    <div id="lorem-ipsum"></div>
+                </div> {% endcomment %}
+                {% comment %} <button class="bt4" onclick="location.href='{%url 'main:main' %}'">
+                    <div>
+                        <strong>썸네일 추천</strong>
+                    </div>
+                </button>
+                <button class="bt5" onclick="location.href='{%url 'main:main' %}'">
+                    <div>
+                        <strong>비속어 필터링</strong>
+                    </div>
+                </button> {% endcomment %}
+                {% comment %} <button id="btn-modal" name="caption-option"></button>
+                <div id="modal" class="modal-overlay">
+                    <div class="modal-window">
+                        <div class="title">
+                            <h2>모달</h2>
+                        </div>
+                        <div class="close-area">X</div>
+                        <div class="content">
+                            <p>가나다라마바사 아자차카타파하</p>
+                            <p>가나다라마바사 아자차카타파하</p>
+                            <p>가나다라마바사 아자차카타파하</p>
+                            <p>가나다라마바사 아자차카타파하</p>
+                            
+                        </div>
+                    </div>
+                </div> {% endcomment %}
+            </div>
+            
+        </div>
+    </div>
+    
+    <div class="foot">
+        <div class="footleft">
+            <h1>
+                <strong>DOBBYEDIT</strong>
+            </h1>
+        </div>
+        <div class="footright">
+            <div class='copyright'>
+                <h4>
+                    <strong>Contact webmaster for more information. 010-지기지기-기용기용</strong>
+                </h4>
+            </div>
+            <button class="footbtn1" onclick="location.href='{%url 'main:main' %}'">
+            </button>
+            <button class="footbtn2" onclick="location.href='{%url 'main:main' %}'">
+            </button>
+        </div>
+    </div>  
+</body>
+<script>
+    /*const loremIpsum = document.getElementById("lorem-ipsum")
+    fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
+        .then(response => response.text())
+        .then(result => loremIpsum.innerHTML = result)*/
+    const modal = document.getElementById("modal")
+    function modalOn() {
+        modal.style.display = "flex"
+    }
+    function isModalOn() {
+        return modal.style.display === "flex"
+    }
+    function modalOff() {
+        modal.style.display = "none"
+    }
+    const btnModal = document.getElementById("btn-modal")
+    btnModal.addEventListener("click", e => {
+        modalOn()
+    })
+    const closeBtn = modal.querySelector(".close-area")
+    closeBtn.addEventListener("click", e => {
+        modalOff()
+    })
+    modal.addEventListener("click", e => {
+        const evTarget = e.target
+        if(evTarget.classList.contains("modal-overlay")) {
+            modalOff()
+        }
+    })
+    window.addEventListener("keyup", e => {
+        if(isModalOn() && e.key === "Escape") {
+            modalOff()
+        }
+    })
+</script>
+</html>

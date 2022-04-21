@@ -80,7 +80,7 @@ body{
     height: 800px;
 }
 
-.row2{
+.filebox{
     display: flex;
     justify-content: center;
     margin: 0 auto;
@@ -88,6 +88,23 @@ body{
     min-height: 300px;
 }
 
+.fun{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 90%;
+    min-height: 300px;
+}
+
+.bt1{
+    color: white;
+    background-color: rgb(110, 80, 41);
+    height: 10vh;
+    width: 20vw;
+    border-radius: 15px;
+    font-size: 40px;
+}
 
 .filebox label {
     vertical-align: middle;

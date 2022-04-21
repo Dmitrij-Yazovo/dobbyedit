@@ -4,8 +4,9 @@ from . import views
 app_name = 'dobby'
 
 urlpatterns = [
-    path('edit/', views.edit, name='edit'),    
-    # path('result/', views.result, name='result'),     
+    path('edit/', views.edit, name='edit'),      
     path('loading/', views.loading, name='loading'), 
     path('result/', views.result, name='result'),    
+    path('fun/', views.fun, name='fun'),    
+    # path('createtest/', views.create_sub, name='create_sub'),    
 ]
