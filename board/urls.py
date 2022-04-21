@@ -14,9 +14,12 @@ urlpatterns = [
     # 글 crud
    
     path('post/write/', views.write, name='write'),
-    path('board/post/', views.post, name='post'),
-    path('post/<int:post_no>/update/',views.update, name="update"),
-    path('post/<int:post_no>/delete/',views.delete, name="delete"),
+    path('post/post/', views.post, name='post'),
+    path('post/<int:post_no>/update/',views.update, name="post_update"),
+    path('post/<int:post_no>/delete/',views.delete, name="post_delete"),
     
+    # 댓글
+    path('post/<int:post_no>/comment_write/',views.comment_write, name="comment_write"),
+    # path('post/<int:post_no>/comment_delete/<int:comment_no>',views.comment_delete, name="comment_delete"),
     
 ]

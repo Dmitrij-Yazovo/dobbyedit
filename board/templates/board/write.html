@@ -173,9 +173,18 @@ body{
     <form method="POST">
         {% csrf_token %}
         Title<br>
+        {% if post.post_no %}
+        <input type="text" name="postname" value="{{post.post_title}}"><br>
+        {% else %}
         <input type="text" name="postname"><br>
+        {% endif%}
+        
         Content<br>
+        {% if post.post_no %}
+        <textarea rows="10" cols="50" name="contents">{{post.post_no}}</textarea><br>
+        {% else %}
         <textarea rows="10" cols="50" name="contents"></textarea><br>
+        {% endif %}
        <input type="file"  name="mainphoto"><br>
      
         <input type="submit" class="btn btn-secondary" value="POST">
