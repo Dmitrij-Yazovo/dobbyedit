@@ -1,4 +1,5 @@
 {% load static %}
+
 <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
 <!DOCTYPE html>
 <html lang="ko">
@@ -64,13 +65,6 @@
             color: white;
         }
         
-         /*#modal .content {
-            margin-top: 20px;
-            padding: 0px 10px;
-            text-shadow: 1px 1px 2px gray;
-            color: white;
-            height:100%;
-        }*/
         .form-select{
             margin:10px;
             height:50px;
@@ -86,7 +80,6 @@
       }
       
      
-        
     </style>
 </head>
 
@@ -119,14 +112,35 @@
         </div>
     </div>
     <div class="content">
+        <div class="fun-button">
+            <form action="." method="POST">
+                {% csrf_token %} 
+                <div class="row1">
+                    {% comment %} <button class="bt1" onclick="location.href='{%url 'main:main' %}'"> {% endcomment %}
+                        <input class="bt1" type="submit" name="create" value="Shorts 영상 만들기" class="btn btn-success"> 
+                        <input class="bt2" type="submit" name="create" value="제목 추천" class="btn btn-success"> 
+                        <input class="bt3" type="submit" name="create" value="자막 넣기" class="btn btn-success"> 
+                </div>
+                <div class="row2">
+                        {% comment %} <strong>Shorts 영상 만들기</strong> {% endcomment %}
+                        <input class="bt4" type="submit" name="filter" value="비속어 필터링" class="btn btn-success"> 
+                        <input class="bt5" type="submit" name="filter" value="썸네일 추천" class="btn btn-success"> 
+                        {% comment %} </button>
+                        <button class="bt2" onclick="location.href='{%url 'main:main' %}'">
+                            <div>
+                                <strong>제목 추천</strong>
+                            </div>
+                        </button>
+                        <button class="bt3" onclick="location.href='{%url 'main:main' %}'">
+                            <div>
+                                <strong>자막 넣기</strong>
+                            </div>
+                        </button>
+                </div> {% endcomment %}
+            </form>
        <button id="btn-modal"></button>
         <div id="modal" class="modal-overlay">
             <div class="modal-window">
-                {% comment %} <div class="title">
-                    <h2>모달</h2>
-                </div> {% endcomment %}
-    
-                {% comment %} <div class="content"> {% endcomment %}
                     <form method="POST"  action="../fun" style="text-align: center;margin-top:40px;">
                         <h3>옵션을 선택해주세요!</h3>
                         <select class="form-select" name="font" aria-label="Default select example" id="font" onchange="handleOnChange1(this)">
@@ -155,20 +169,10 @@
                         <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
                     </form>
-               
-        </div>
-
-
-                {% comment %} else문: 동영상있을시 쇼츠 or 썸네일추출 선택 {% endcomment %}
-                {% comment %} <div id="container">
-                    <h2>Lorem Ipsum</h2>
-                    <div id="lorem-ipsum"></div>
-                </div> {% endcomment %}
-                
-            </div>
-            
+            </div>          
         </div>
     </div>
+
     <div class="foot">
         <div class="footleft">
             <h1>
@@ -223,8 +227,7 @@
             modalOff()
         }
     })
-   
-  
+
     function handleOnChange1(e) { //폰트 종류
         // 선택된 데이터의 텍스트값 가져오기
         const text = e.options[e.selectedIndex].text;
@@ -291,8 +294,6 @@
         console.log(test);
       }*/
 
- 
-       
 
 </script>
 </html>

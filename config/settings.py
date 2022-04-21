@@ -85,7 +85,7 @@ DATABASES = {
     # db환경설정
     'custom': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'test99',
+        'NAME': 'new_schema',
         'USER': 'root',
         'PASSWORD': 'aivle',
         'HOST': 'localhost',
