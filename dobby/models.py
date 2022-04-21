@@ -7,7 +7,7 @@ from board.models import Post
 class File(models.Model):
     file_no = models.IntegerField(primary_key= True)
     member_id = models.ForeignKey(Member, on_delete=models.CASCADE, db_column='member_id')
-    file_name = models.ForeignKey(Post, on_delete=models.CASCADE, db_column='post_no')
+    file_name = models.CharField(max_length=50)
     file_date = models.CharField(max_length=1000)
     file_root = models.DateField()
     
