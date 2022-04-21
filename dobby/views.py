@@ -14,3 +14,7 @@ def loading(request):
 def result(request):
     
     return render(request,"dobby/dobbyResult.html")
+def fun(request):
+    
+    return render(request,"dobby/fun.html")
+

@@ -1,0 +1,298 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+</head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit</title>
+    <link rel="stylesheet" href="{% static 'css/edit.css' %}">
+
+    <style>
+       #modal.modal-overlay {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(1.5px);
+            -webkit-backdrop-filter: blur(1.5px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        #modal .modal-window {
+            background: burlywood;
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+            backdrop-filter: blur( 13.5px );
+            -webkit-backdrop-filter: blur( 13.5px );
+            border-radius: 10px;
+            border: 1px solid rgba( 255, 255, 255, 0.18 );
+            width: 500px;
+            height: 500px;
+            position: relative;
+            top: -100px;
+            padding: 10px;
+        }
+        #modal .title {
+            padding-left: 10px;
+            display: inline;
+            text-shadow: 1px 1px 2px gray;
+            color: white;
+            
+        }
+        #modal .title h2 {
+            display: inline;
+        }
+        #modal .close-area {
+            display: inline;
+            float: right;
+            padding-right: 10px;
+            cursor: pointer;
+            text-shadow: 1px 1px 2px gray;
+            color: white;
+        }
+        
+         /*#modal .content {
+            margin-top: 20px;
+            padding: 0px 10px;
+            text-shadow: 1px 1px 2px gray;
+            color: white;
+            height:100%;
+        }*/
+        .form-select{
+            margin:10px;
+            height:50px;
+            font-size: 15px;
+            background-color: rgb(110, 80, 41);
+            border-radius:7px;
+            border-color:rgb(110, 80, 41);
+            text-align: center;
+            
+        }
+      .btn-footer{
+          margin-top:30px;
+      }
+      
+     
+        
+    </style>
+</head>
+
+<body>
+    <div class='maindobby'>
+        <div class="nv">
+            <div class="navleft">
+                <h1>
+                    <a href="{%url 'main:main' %}">DOBBYEDIT</a>
+                </h1>
+            </div>
+            <div class="navright">
+                <li class=nav_item>    
+                    <a href="{%url 'dobby:edit' %}">영상편집</a>
+                </li>
+                <li class="divider"></li>
+                <li class=nav_item>    
+                    <a href="{%url 'main:main' %}">게시판</a>
+                </li>
+                <li class="divider"></li>
+                <li class=nav_item>    
+                    <a href="{%url 'main:my' %}">MY</a>
+                </li>
+            </div>
+        </div>
+        <div class="title">
+            <h1>
+                영상편집을 성공하여 도비를 해방시켜주세요!
+            </h1>
+        </div>
+    </div>
+    <div class="content">
+       <button id="btn-modal"></button>
+        <div id="modal" class="modal-overlay">
+            <div class="modal-window">
+                {% comment %} <div class="title">
+                    <h2>모달</h2>
+                </div> {% endcomment %}
+    
+                {% comment %} <div class="content"> {% endcomment %}
+                    <form method="POST"  action="../fun" style="text-align: center;margin-top:40px;">
+                        <h3>옵션을 선택해주세요!</h3>
+                        <select class="form-select" name="font" aria-label="Default select example" id="font" onchange="handleOnChange1(this)">
+                            <option selected>font</option>
+                            <option value="font1" style="font-size:12pt; font-family: 'Lobster';">font1</option>
+                            <option value="font2" style="font-size:12pt; font-family: 'Dancing Script';">font2</option>
+                            <option value="font3" style="font-size:12pt; font-family: 'Shadows Into Light', cursive;">font3</option>
+                        </select>
+                        <div id='result1'></div>
+                        <select class="form-select" name="fontcolor" aria-label="Default select example"id="fontcolor" onchange="handleOnChange2(this)">
+                            <option selected>font-color</option>
+                            <option value="font-color1">font-color1</option>
+                            <option value="font-color2">font-color2</option>
+                            <option value="font-color3">font-color3</option>
+                        </select>
+                        <div id='result2'></div>
+                        <select class="form-select"  name="bgcolor"aria-label="Default select example"id="bgcolor" onchange="handleOnChange3(this)">
+                            <option selected>bg-color</option>
+                            <option value="bg-color1">bg-color1</option>
+                            <option value="bg-color2">bg-color2</option>
+                            <option value="bg-color3">bg-color3</option>
+                        </select>
+                        <div id='result3'></div>
+                        <div class="btn-footer">
+                        <button type="button" class="btn btn-primary closebtn" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+               
+        </div>
+
+
+                {% comment %} else문: 동영상있을시 쇼츠 or 썸네일추출 선택 {% endcomment %}
+                {% comment %} <div id="container">
+                    <h2>Lorem Ipsum</h2>
+                    <div id="lorem-ipsum"></div>
+                </div> {% endcomment %}
+                
+            </div>
+            
+        </div>
+    </div>
+    <div class="foot">
+        <div class="footleft">
+            <h1>
+                <strong>DOBBYEDIT</strong>
+            </h1>
+        </div>
+        <div class="footright">
+            <div class='copyright'>
+                <h4>
+                    <strong>Contact webmaster for more information. 010-지기지기-기용기용</strong>
+                </h4>
+            </div>
+            <button class="footbtn1" onclick="location.href='{%url 'main:main' %}'">
+            </button>
+            <button class="footbtn2" onclick="location.href='{%url 'main:main' %}'">
+            </button>
+        </div>
+    </div>  
+</body>
+<script>
+    /*const loremIpsum = document.getElementById("lorem-ipsum")
+    fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
+        .then(response => response.text())
+        .then(result => loremIpsum.innerHTML = result)*/
+    const modal = document.getElementById("modal")
+    function modalOn() {
+        modal.style.display = "flex"
+    }
+    function isModalOn() {
+        return modal.style.display === "flex"
+    }
+    function modalOff() {
+        modal.style.display = "none"
+    }
+    const btnModal = document.getElementById("btn-modal")
+    btnModal.addEventListener("click", e => {
+        modalOn()
+    })
+    const closeBtn = modal.querySelector(".closebtn")
+    closeBtn.addEventListener("click", e => {
+        console.log('클릭')
+        modalOff()
+    })
+    modal.addEventListener("click", e => {
+        const evTarget = e.target
+        if(evTarget.classList.contains("modal-overlay")) {
+            modalOff()
+        }
+    })
+    window.addEventListener("keyup", e => {
+        if(isModalOn() && e.key === "Escape") {
+            modalOff()
+        }
+    })
+   
+  
+    function handleOnChange1(e) { //폰트 종류
+        // 선택된 데이터의 텍스트값 가져오기
+        const text = e.options[e.selectedIndex].text;
+        console.log(e.options);
+        // 선택한 텍스트 출력
+        console.log(text);
+        console.log(1);
+
+        if (text=='font1'){
+        document.getElementById('result1').innerHTML
+          = "<span style='font-family: Lobster;'> font1</span>";
+        }else if(text=='font2'){
+            document.getElementById('result1').innerHTML
+          ="<span style='font-family: Dancing Script;'> font2</span>";
+        }else if(text=='font3'){
+            document.getElementById('result1').innerHTML
+          ="<span style='font-family: Shadows Into Light, cursive;'> font3</span>";
+        }
+      }
+      function handleOnChange2(e) { //폰트색
+        // 선택된 데이터의 텍스트값 가져오기
+        const text = e.options[e.selectedIndex].text;
+        console.log(e.options);
+        // 선택한 텍스트 출력
+        console.log(2);
+
+        if (text=='font-color1'){
+        document.getElementById('result2').innerHTML
+          = "<span style='color:red'> font-color1</span>";
+        }else if(text=='font-color2'){
+            document.getElementById('result2').innerHTML
+          ="<span style='color:black'> font-color2</span>";
+        }else if(text=='font-color3'){
+            document.getElementById('result2').innerHTML
+          ="<span style='color:blue'>font-color3</span>";
+        }
+      }
+      function handleOnChange3(e) { //배경색
+        // 선택된 데이터의 텍스트값 가져오기
+        const text = e.options[e.selectedIndex].text;
+        // 선택한 텍스트 출력
+        if (text=='bg-color1'){
+        document.getElementById('result3').innerHTML
+          = "<span style='color:red'> bg-color1</span>";
+        }else if(text=='bg-color2'){
+            document.getElementById('result3').innerHTML
+          ="<span style='color:black'> bg-color2</span>";
+        }else if(text=='bg-color3'){
+            document.getElementById('result3').innerHTML
+          ="<span style='color:blue'>bg-color3</span>";
+        }
+      }
+     /* $(document).ready(function() {
+        $( "select[name=fontselect]" ).val( "{{ font_text }}" );
+        $('select[name=fontselect]').change(function () {
+        console.log($('select[name=fontselect]').val());
+        font = $('select[name=fontselect]').val();
+        $('.form').submit();
+        });
+    });
+    function getItem(){
+        
+        var test=$("select[name=fontselect]").val();
+        console.log(test);
+      }*/
+
+ 
+       
+
+</script>
+</html>
