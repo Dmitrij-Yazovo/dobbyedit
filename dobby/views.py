@@ -28,8 +28,44 @@ def fun(request):
     elif 'create' in request.POST:
         txt_pth = "C:\django\dobbyedit\dobbyedit\dobby\static\subtitle.txt"
         video_pth = "C:\django\dobbyedit\dobbyedit\dobby\static\media.mp4"
+        
+        font =  request.POST['font']
+        if font == "font1":
+            fontnum = 1
+        
+        elif font == "font2":
+            fontnum = 2
+        
+        elif font == "font3":
+            fontnum = 3
+        
+        fontcolor =  request.POST['fontcolor']
+        if fontcolor == "font-color1":
+            font_col_num = 1
+        
+        elif fontcolor == "font-color2":
+            font_col_num = 2
+        
+        elif fontcolor == "font-color3":
+            font_col_num = 3
+        
+        font_bg_num = 1
+
+        bgcolor =  request.POST['bgcolor']
+        if bgcolor == "bg-color1":
+            font_bg_num = 1
+        
+        elif bgcolor == "bg-color1":
+            font_bg_num = 2
+        
+        elif bgcolor == "bg-color1":
+            font_bg_num = 3
+
+        
+        
         subtitle_fps(txt_pth,video_pth)
-        subtitle_generator(txt_pth,video_pth)
+        subtitle_generator(txt_pth,video_pth,fontnum,font_col_num,font_bg_num)
+        # subtitle_generator(txt_pth,video_pth)
         combine_audio(video_pth)
     
     elif 'filter' in request.POST:

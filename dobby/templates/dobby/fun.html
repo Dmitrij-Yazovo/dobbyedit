@@ -13,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit</title>
-    <link rel="stylesheet" href="{% static 'css/edit.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fun.css' %}">
 
     <style>
        #modal.modal-overlay {
@@ -115,33 +115,27 @@
         <div class="fun-button">
             <form action="." method="POST">
                 {% csrf_token %} 
-                <div class="row1">
+                    <div class="row1">
                     {% comment %} <button class="bt1" onclick="location.href='{%url 'main:main' %}'"> {% endcomment %}
                         <input class="bt1" type="submit" name="create" value="Shorts 영상 만들기" class="btn btn-success"> 
                         <input class="bt2" type="submit" name="create" value="제목 추천" class="btn btn-success"> 
-                        <input class="bt3" type="submit" name="create" value="자막 넣기" class="btn btn-success"> 
-                </div>
-                <div class="row2">
+                        {% comment %} <input class="bt3" type="submit" name="create" value="자막 넣기" class="btn btn-success">  {% endcomment %}
+                        <input class="bt3" type="submit" name="filter" value="비속어 필터링" class="btn btn-success"> 
+                    </div>
+                </form>
+                    <div class="row2">
+                        <form class="bt4form" action="." method="POST">
+                            {% csrf_token %} 
                         {% comment %} <strong>Shorts 영상 만들기</strong> {% endcomment %}
-                        <input class="bt4" type="submit" name="filter" value="비속어 필터링" class="btn btn-success"> 
-                        <input class="bt5" type="submit" name="filter" value="썸네일 추천" class="btn btn-success"> 
-                        {% comment %} </button>
-                        <button class="bt2" onclick="location.href='{%url 'main:main' %}'">
-                            <div>
-                                <strong>제목 추천</strong>
-                            </div>
-                        </button>
-                        <button class="bt3" onclick="location.href='{%url 'main:main' %}'">
-                            <div>
-                                <strong>자막 넣기</strong>
-                            </div>
-                        </button>
-                </div> {% endcomment %}
-            </form>
-       <button id="btn-modal"></button>
+                            <input class="bt4" type="submit" name="filter" value="썸네일 추천" class="btn btn-success">
+                        </form> 
+                        <button class="bt5" id="btn-modal">자막 넣기</button>
+                    </div>
+        </div>
         <div id="modal" class="modal-overlay">
             <div class="modal-window">
-                    <form method="POST"  action="../fun" style="text-align: center;margin-top:40px;">
+                    <form  method="POST"  action="." style="text-align: center;margin-top:40px;">
+                        {% csrf_token %}
                         <h3>옵션을 선택해주세요!</h3>
                         <select class="form-select" name="font" aria-label="Default select example" id="font" onchange="handleOnChange1(this)">
                             <option selected>font</option>
@@ -157,7 +151,7 @@
                             <option value="font-color3">font-color3</option>
                         </select>
                         <div id='result2'></div>
-                        <select class="form-select"  name="bgcolor"aria-label="Default select example"id="bgcolor" onchange="handleOnChange3(this)">
+                        <select class="form-select"  name="bgcolor" aria-label="Default select example"id="bgcolor" onchange="handleOnChange3(this)">
                             <option selected>bg-color</option>
                             <option value="bg-color1">bg-color1</option>
                             <option value="bg-color2">bg-color2</option>
@@ -166,7 +160,7 @@
                         <div id='result3'></div>
                         <div class="btn-footer">
                         <button type="button" class="btn btn-primary closebtn" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" name="create" class="btn btn-primary">Save changes</button>
                         </div>
                     </form>
             </div>          
