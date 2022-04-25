@@ -114,7 +114,7 @@ def delete(request, post_no):
 def comment_write(request, post_no):
     if request.method == 'POST':
         now = datetime.datetime.now()
-        save_member_id = request.session.get('member_id')
+        save_member_id = request.session.get('s_id')
         jsonObject = json.loads(request.body)
         t_post_no = jsonObject.get('post_no')
         reply = Comment.objects.create(

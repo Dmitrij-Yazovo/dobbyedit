@@ -66,8 +66,10 @@
                     <strong>{{ post.post_title }}</strong>
                 </div>
                 <div class="post-btn">
+                    {% if request.session.s_id == post.member_id.member_id %}
                     <button class="adj-btn" onclick="location.href='{%url 'board:post_update' post.post_no %}'">수정</button>
                     <button class="del-btn" onclick="location.href='{%url 'board:post_delete' post.post_no %}'">삭제</button>
+                    {% endif %}
                 </div>
             </div>
             <div class="post">
@@ -165,7 +167,7 @@
                     <img class="user-icon" src="{% static 'assets/harryicon.png'%}" alt="user icon">
                     </div>
                     <div class="comment-body">
-                        <p class="comment-text">${content}</p>
+                        <p class="comment-text">${receive.content}</p>
                     <h6>${receive.pp}</h6>
                     </div>`;
                     newTr.innerHTML = str;
