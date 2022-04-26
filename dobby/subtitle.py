@@ -104,36 +104,34 @@ def subtitle_generator(txt_pth,video_pth,fontnum,font_col_num,font_bg_num):
       
       y0, dy = 620, text_size[1]
 
-    #   for i, line in enumerate(text.split('\n')):
-    #       y = y0 + i*dy
-    #     #  cv2.rectangle(frame,(0,y),(org[0]+size[0],y),(0,0,255),-1) # 글자 배경 지정 ( 색상 : (255,0,0))
-    #       #cv2.rectangle(frame,(0,y),(org[0]+size[0],y-size[1]),(0,0,255),-1) # 글자 배경 지정 ( 색상 : (255,0,0))
-
-    #       img = Image.fromarray(frame)
-    #       draw = ImageDraw.Draw(img, 'RGBA')
-    #       draw.rectangle((0,y,org[0]+text_size[0],y-text_size[1]),fill=(128,128,128,50))
-    #       frame = np.array(img)
-    #       img = Image.fromarray(frame)
-    #       draw2 = ImageDraw.Draw(img)
-    #       draw2.text((0, y),line,font = font,fill = (255,255,255,255))
-    #       frame = np.array(img)
+      for i, line in enumerate(text.split('\n')):
+        y = y0 + i*dy
+       
+        if line :
+            img = Image.fromarray(frame)
+            draw = ImageDraw.Draw(img, 'RGBA')
+            draw.rectangle((0,y,text_size[0],y+text_size[1]),fill=bgcolor)
+            frame = np.array(img)
+        img = Image.fromarray(frame)
+        draw2 = ImageDraw.Draw(img)
+        draw2.text((0, y),line,font = font,fill = fontcolor)
+        frame = np.array(img)
 
           
-          #cv2.putText(frame, line, (0, y ), font, 1,(255,0,0), 2) # 글자 넣기 ( 색상 : (255,0,0))    
-      # 미리보기 cv2.imshow("frame",frame)
-      line = text.split('\n')
-      img = Image.fromarray(frame)
-      draw = ImageDraw.Draw(img, 'RGBA')
-      draw.rectangle((0,y0-text_size[1],text_size[0],y0+text_size[1]),fill=bgcolor)
-      frame = np.array(img)
-      img = Image.fromarray(frame)
-      draw2 = ImageDraw.Draw(img)
-      draw2.text((0, y0),line[1],font = font,fill = fontcolor)
-      frame = np.array(img)
-      img = Image.fromarray(frame)
-      draw3 = ImageDraw.Draw(img)
-      draw3.text((0, y0-text_size[1]),line[0],font = font,fill = fontcolor)
-      frame = np.array(img)
+          
+    #   line = text.split('\n')
+    #   img = Image.fromarray(frame)
+    #   draw = ImageDraw.Draw(img, 'RGBA')
+    #   draw.rectangle((0,y0-text_size[1],text_size[0],y0+text_size[1]),fill=bgcolor)
+    #   frame = np.array(img)
+    #   img = Image.fromarray(frame)
+    #   draw2 = ImageDraw.Draw(img)
+    #   draw2.text((0, y0),line[1],font = font,fill = fontcolor)
+    #   frame = np.array(img)
+    #   img = Image.fromarray(frame)
+    #   draw3 = ImageDraw.Draw(img)
+    #   draw3.text((0, y0-text_size[1]),line[0],font = font,fill = fontcolor)
+    #   frame = np.array(img)
       
           
       out.write(frame)

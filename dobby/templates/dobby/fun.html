@@ -112,22 +112,57 @@
         </div>
     </div>
     <div class="content">
+        <div id='mask' style='position:absolute; z-index:1; display:none; background-color:black; left:0%; top:-6%' >
+            <div id='loadingImg' style='display:block;'>
+                <img src='/static/assets/snap-dobby.gif' style='position: relative; width: 100%; height:auto; display:block;'/>
+            </div>
+        </div>
+        <script>
+            function LoadingWithMask(mask, loadingImg) {
+
+                //화면의 높이와 너비를 구합니다.
+                var maskHeight = document.body.clientHeight;
+                var maskWidth  = window.document.body.clientWidth;
+        
+                //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채웁니다.
+                mask.style.width = maskWidth;
+                mask.style.height = maskHeight;
+                mask.style.opacity = '0.5';
+              
+                //마스크 표시
+                mask.style.display = 'block';
+        
+                //로딩중 이미지 표시
+                loadingImg.style.display = 'block';
+            }
+        
+            // 로딩창 제거
+            function closeLoadingWithMask(mask, loadingImg) {
+                loadingImg.style.display = "none";
+                mask.style.display = "none";
+            }
+            function loadingDobby() {
+                var loadingImg = document.getElementById('loadingImg');
+                var mask = document.getElementById('mask');
+                LoadingWithMask(mask, loadingImg);
+            }
+        </script>
         <div class="fun-button">
             <form action="." method="POST">
                 {% csrf_token %} 
                     <div class="row1">
                     {% comment %} <button class="bt1" onclick="location.href='{%url 'main:main' %}'"> {% endcomment %}
-                        <input class="bt1" type="submit" name="create" value="Shorts 영상 만들기" class="btn btn-success"> 
-                        <input class="bt2" type="submit" name="create" value="제목 추천" class="btn btn-success"> 
+                        <input id="btn" class="bt1" type="submit" name="shorts" value="Shorts 영상 만들기" class="btn btn-success" onclick="loadingDobby();"> 
+                        <input id="btn" class="bt2" type="submit" name="create" value="제목 추천" class="btn btn-success" onclick="loadingDobby();"> 
                         {% comment %} <input class="bt3" type="submit" name="create" value="자막 넣기" class="btn btn-success">  {% endcomment %}
-                        <input class="bt3" type="submit" name="filter" value="비속어 필터링" class="btn btn-success"> 
+                        <input id="btn" class="bt3" type="submit" name="filter" value="비속어 필터링" class="btn btn-success" onclick="loadingDobby();"> 
                     </div>
                 </form>
                     <div class="row2">
                         <form class="bt4form" action="." method="POST">
                             {% csrf_token %} 
                         {% comment %} <strong>Shorts 영상 만들기</strong> {% endcomment %}
-                            <input class="bt4" type="submit" name="filter" value="썸네일 추천" class="btn btn-success">
+                            <input id="btn" class="bt4" type="submit" name="filter" value="썸네일 추천" class="btn btn-success" onclick="loadingDobby();">
                         </form> 
                         <button class="bt5" id="btn-modal">자막 넣기</button>
                     </div>
@@ -139,32 +174,57 @@
                         <h3>옵션을 선택해주세요!</h3>
                         <select class="form-select" name="font" aria-label="Default select example" id="font" onchange="handleOnChange1(this)">
                             <option selected>font</option>
-                            <option value="font1" style="font-size:12pt; font-family: 'Lobster';">font1</option>
-                            <option value="font2" style="font-size:12pt; font-family: 'Dancing Script';">font2</option>
-                            <option value="font3" style="font-size:12pt; font-family: 'Shadows Into Light', cursive;">font3</option>
+                            <option value="font1" style="font-size:12pt; font-family: 'Caveat',cursive;">Caveat</option>
+                            <option value="font2" style="font-size:12pt; font-family: 'Indie Flower', cursive;">IndieFlower</option>
+                            <option value="font3" style="font-size:12pt; font-family: 'Montserrat', sans-serif;">Montserrat</option>
                         </select>
                         <div id='result1'></div>
                         <select class="form-select" name="fontcolor" aria-label="Default select example"id="fontcolor" onchange="handleOnChange2(this)">
                             <option selected>font-color</option>
-                            <option value="font-color1">font-color1</option>
-                            <option value="font-color2">font-color2</option>
-                            <option value="font-color3">font-color3</option>
+                            <option value="font-color1" style="color:white;">White</option>
+                            <option value="font-color2" style="color:black;">Black</option>
+                            <option value="font-color3" style="color:red;">Red</option>
                         </select>
                         <div id='result2'></div>
                         <select class="form-select"  name="bgcolor" aria-label="Default select example"id="bgcolor" onchange="handleOnChange3(this)">
                             <option selected>bg-color</option>
-                            <option value="bg-color1">bg-color1</option>
-                            <option value="bg-color2">bg-color2</option>
-                            <option value="bg-color3">bg-color3</option>
+                            <option value="bg-color1" style="color:black;">Black</option>
+                            <option value="bg-color2" style="color:gray;">Gray</option>
+                            <option value="bg-color3" style="color:white;">White</option>
                         </select>
                         <div id='result3'></div>
                         <div class="btn-footer">
                         <button type="button" class="btn btn-primary closebtn" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" name="create" class="btn btn-primary">Save changes</button>
+                        <button id="btn" type="submit" name="create" class="btn btn-primary" onclick="loadingDobby();">Save changes</button>
                         </div>
                     </form>
             </div>          
         </div>
+        {% comment %} <div id="wrap-loading" style="z-index: 1;">
+          <h1 style="display: inline;">Loading...</h1>
+          <img src="/static/assets/snap-dobby.gif" alt="Loading..." />
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#btn").click(function () {
+                    $.ajax({
+                        //url: "/dobby/fun/",
+                        data: {},
+                        //data: {},
+                        success: function () {
+                        //$("body").append(data);
+                        },
+                        beforeSend: function () {
+                        $("#wrap-loading").show();
+                        },
+                        complete: function () {
+                        $("#wrap-loading").hide();
+                        },
+                    });
+                });
+            });
+        </script> {% endcomment %}
     </div>
 
     <div class="foot">
@@ -230,15 +290,15 @@
         console.log(text);
         console.log(1);
 
-        if (text=='font1'){
+        if (text=='Caveat'){
         document.getElementById('result1').innerHTML
-          = "<span style='font-family: Lobster;'> font1</span>";
-        }else if(text=='font2'){
+          = "<span style='font-family: Caveat,cursive;'> Caveat</span>";
+        }else if(text=='IndieFlower'){
             document.getElementById('result1').innerHTML
-          ="<span style='font-family: Dancing Script;'> font2</span>";
-        }else if(text=='font3'){
+          ="<span style='font-family:Indie Flower, cursive;'>IndieFlower</span>";
+        }else if(text=='Montserrat'){
             document.getElementById('result1').innerHTML
-          ="<span style='font-family: Shadows Into Light, cursive;'> font3</span>";
+          ="<span style='font-family:Montserrat, sans-serif;'> Montserrat</span>";
         }
       }
       function handleOnChange2(e) { //폰트색
@@ -248,30 +308,30 @@
         // 선택한 텍스트 출력
         console.log(2);
 
-        if (text=='font-color1'){
+        if (text=='White'){
         document.getElementById('result2').innerHTML
-          = "<span style='color:red'> font-color1</span>";
-        }else if(text=='font-color2'){
+          = "<span style='color:white'> White</span>";
+        }else if(text=='Black'){
             document.getElementById('result2').innerHTML
-          ="<span style='color:black'> font-color2</span>";
-        }else if(text=='font-color3'){
+          ="<span style='color:black'>Black</span>";
+        }else if(text=='Red'){
             document.getElementById('result2').innerHTML
-          ="<span style='color:blue'>font-color3</span>";
+          ="<span style='color:red'>Red</span>";
         }
       }
       function handleOnChange3(e) { //배경색
         // 선택된 데이터의 텍스트값 가져오기
         const text = e.options[e.selectedIndex].text;
         // 선택한 텍스트 출력
-        if (text=='bg-color1'){
+        if (text=='Black'){
         document.getElementById('result3').innerHTML
-          = "<span style='color:red'> bg-color1</span>";
-        }else if(text=='bg-color2'){
+          = "<span style='color:black'> Black</span>";
+        }else if(text=='Gray'){
             document.getElementById('result3').innerHTML
-          ="<span style='color:black'> bg-color2</span>";
-        }else if(text=='bg-color3'){
+          ="<span style='color:gray'> Gray</span>";
+        }else if(text=='White'){
             document.getElementById('result3').innerHTML
-          ="<span style='color:blue'>bg-color3</span>";
+          ="<span style='color:white'>White</span>";
         }
       }
      /* $(document).ready(function() {

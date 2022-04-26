@@ -102,7 +102,6 @@ body{
     border-style: dotted;
     height: 20vh;
     border-radius: 8px;
-    margin: 10px;
     background: white;
     transition: box-shadow 250ms ease-in;
     transition: transform 250ms ease-in;
@@ -113,13 +112,19 @@ body{
     align-items: center;
     font-size: 40px;
 }
+
 .bt4form{
-    width: 100%;
-}
-.bt1, .bt2, .bt3, .bt4, .bt5{
     width: 33%;
+    margin: 10px;
+}
+.bt1, .bt2, .bt3, .bt5{
+    width: 33%;
+    margin: 10px;
 }
 
+.bt4{
+    width:100%;
+}
 input:hover{
     box-shadow: 0px 4px 4px rgb(110, 80, 41), 13px 10px 15px rgb(110, 80, 41);
     transform: translate(-2px, -2px);

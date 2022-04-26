@@ -138,12 +138,12 @@
     [...document.querySelectorAll('.register-btn')].forEach(function (item) {
         item.addEventListener('click', e => {
             let content = document.querySelector('.comment-write').value;
-            let id_check = $('.comment-head').attr('id');
-            console.log(id_check);
+            //let id_check = $('.comment-head').attr('id');
+            //console.log(id_check);
             console.log(content);
             document.querySelector('.comment-write').value = '';
             let param = {
-                "post_no": id_check,
+                //"post_no": id_check,
                 "comment_detail": content,
             }
             $.ajax({
@@ -165,8 +165,8 @@
                     <img class="user-icon" src="{% static 'assets/harryicon.png'%}" alt="user icon">
                     </div>
                     <div class="comment-body">
+                        <h6>${receive.pp}</h6>
                         <p class="comment-text">${content}</p>
-                    <h6>${receive.pp}</h6>
                     </div>`;
                     newTr.innerHTML = str;
                     replyTable.append(newTr);
