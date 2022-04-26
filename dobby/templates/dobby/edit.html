@@ -96,6 +96,19 @@
             </h1>
         </div>
     </div>
+
+
+    <form action="{% url 'dobby:edit' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="e_file">
+        <input type="submit" value="전송">
+    </form>
+
+
+
+
+
+
     <div class="content">
         <div class="upload-button">
             <div class="row2">
@@ -104,11 +117,16 @@
                     <label for="file">
                         <strong>동영상을 넣어주세요</strong>
                     </label> 
-                    <input type="file" id="file">
+                    <form action="{% url 'dobby:edit'%}" method="post" entype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="file" id="file" name="edit_file">
+                        {% comment %} <input type='submit' class='bt1'/> {% endcomment %}
+                        <div class="fun">
+                            <input type='submit' class='bt1'/>
+                        </div>
+                    </form>
                 </div>
-                <div class="fun">
-                    <button class='bt1' onclick="location.href='{%url 'dobby:fun' %}'">next</button>
-                </div>
+                
                 {% comment %} else문: 동영상있을시 쇼츠 or 썸네일추출 선택 {% endcomment %}
                 {% comment %} <div id="container">
                     <h2>Lorem Ipsum</h2>

@@ -8,6 +8,10 @@ from .models import Post, Member, Comment, Postfile
 
 # Create your views here.
 def postlist(request):
+    s_id = request.session.get('s_id') # session id 유무 체크
+    if s_id==None:
+        return redirect("/main/login/")
+
     page = request.GET.get('page', '1')
     search_keyword = request.GET.get('keyword', '')
     search_type = request.GET.get('type', '')
@@ -35,15 +39,27 @@ def postlist(request):
     return render(request, 'board/postlist.html', context)
 
 def post(request, post_no):
+    s_id = request.session.get('s_id') # session id 유무 체크
+    if s_id==None:
+        return redirect("/main/login/")
+    
     if request.method == 'GET':
         post = Post.objects.get(post_no=post_no)
         comments = Comment.objects.filter(post_no=post_no)
-        postfile = Postfile.objects.get(post_no=post_no)
-        context = {
-            'post':post,
-            'comments':comments,
-            'postfile':postfile,
-        }
+
+        try:
+            postfile = Postfile.objects.get(post_no=post_no)
+            context = {
+                'post':post,
+                'comments':comments,
+                'postfile':postfile,
+            }
+        except Postfile.DoesNotExist:
+            context = {
+                'post':post,
+                'comments':comments,
+            }        
+
         return render(request, 'board/post.html', context)
     
     
@@ -61,6 +77,11 @@ def post(request, post_no):
 
 # 작업중
 def write(request):
+    s_id = request.session.get('s_id') # session id 유무 체크
+    if s_id==None:
+        return redirect("/main/login/")
+    
+    
     if request.method == 'POST':
         save_post_title = request.POST.get('postname')
         save_post_detail = request.POST.get('contents')
@@ -100,6 +121,10 @@ def write(request):
     
 
 def update(request, post_no):
+    s_id = request.session.get('s_id') # session id 유무 체크
+    if s_id==None:
+        return redirect("/main/login/")
+    
     post = Post.objects.get(post_no=post_no)
     if request.method == "POST":
         post.post_title = request.POST['postname']
@@ -119,6 +144,10 @@ def update(request, post_no):
 
 
 def delete(request, post_no):
+    s_id = request.session.get('s_id') # session id 유무 체크
+    if s_id==None:
+        return redirect("/main/login/")
+    
     post = Post.objects.get(post_no=post_no)
     post.delete()
     return postlist(request)
@@ -130,6 +159,10 @@ def delete(request, post_no):
 
 
 def comment_write(request, post_no):
+    s_id = request.session.get('s_id') # session id 유무 체크
+    if s_id==None:
+        return redirect("/main/login/")
+    
     if request.method == 'POST':
         now = datetime.datetime.now()
         s_id = request.session.get('s_id')

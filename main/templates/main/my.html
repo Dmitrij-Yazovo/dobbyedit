@@ -35,7 +35,7 @@
         <div class="intro">
             <div class="row1">
                 <div>
-                    <strong>해리포터님</strong>
+                    <strong>{{ request.session.s_id }}님 반갑습니다.</strong>
                 </div>
             </div>
             <div class="row2">
@@ -43,6 +43,7 @@
                     <img src='/static/assets/harryicon.png' style="width: 300px; min-width: 140px;">
                 </div>
                 <div>
+                    {{ request.session.s_id }} 님 반갑습니다.
                 </div>    
             </div>
         </div>
@@ -67,11 +68,13 @@
                         <tbody>
                         {%for file in files%}
                         <tr>
+                            {%if file.member_id.member_id == request.session.s_id%}
                             <td>{{file.file_no}}</td>
                             <td>{{file.member_id.member_id}}</td>
                             <td>{{file.file_name}}</td>
                             <td>{{file.file_date}}</td>
                             <td>{{file.file_root}}</td>
+                            {%endif%}
                         </tr>
                         {%endfor%}
                         </tbody>

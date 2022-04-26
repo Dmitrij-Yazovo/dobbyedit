@@ -9,9 +9,9 @@ from dobby.models import File
 
 # HOME
 def main(request):
-    s_id = request.session.get('s_id') # session id 유무 체크
-    if s_id==None:
-        return redirect("/main/login/")
+    # s_id = request.session.get('s_id') # session id 유무 체크
+    # if s_id==None:
+    #     return redirect("/main/login/")
     
     return render(request,"main/main.html")
 # def main(request):
@@ -55,13 +55,20 @@ def login(request):
 
 # LOGOUT
 def logout(request):
-    request.session.pop('s_id')
+    s_id = request.session.get('s_id') # session id 유무 체크
+    if s_id==None:
+        return redirect("/main/login/")
     
-    return render(request, "main/login.html")
+    request.session.flush()
+    
+    return redirect("/main/login/")
 
 
 # MY PAGE
 def my(request):
+    s_id = request.session.get('s_id') # session id 유무 체크
+    if s_id==None:
+        return redirect("/main/login/")
     
     files = File.objects.all()
     

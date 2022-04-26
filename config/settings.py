@@ -85,9 +85,9 @@ DATABASES = {
     # db환경설정
     'custom': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'new_schema',
+        'NAME': 'test90',
         'USER': 'root',
-        'PASSWORD': 'aivle',
+        'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': 3306,
     }
@@ -153,6 +153,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
