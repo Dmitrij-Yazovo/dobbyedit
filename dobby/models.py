@@ -14,7 +14,7 @@ class File(models.Model):
     class Meta:
         db_table = 'file'
         app_label = 'dobby'
-        unique_together = (('file_no', 'member_id',),)
+        unique_together = (('file_no', 'member_id'),)
         managed = False
         
         

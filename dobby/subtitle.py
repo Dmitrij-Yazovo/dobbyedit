@@ -114,19 +114,18 @@ def subtitle_generator(txt_pth,video_pth,fontnum,font_col_num,font_bg_num):
     
       y0, dy = 620, text_size[1]
       
-      line = text.split('\n')
-      img = Image.fromarray(frame)
-      draw = ImageDraw.Draw(img, 'RGBA')
-      draw.rectangle((0,y0-text_size[1],text_size[0],y0+text_size[1]),fill=bgcolor)
-      frame = np.array(img)
-      img = Image.fromarray(frame)
-      draw2 = ImageDraw.Draw(img)
-      draw2.text((0, y0),line[1],font = font,fill = fontcolor)
-      frame = np.array(img)
-      img = Image.fromarray(frame)
-      draw3 = ImageDraw.Draw(img)
-      draw3.text((0, y0-text_size[1]),line[0],font = font,fill = fontcolor)
-      frame = np.array(img)
+      for i, line in enumerate(text.split('\n')):
+            y = y0 + i*dy
+
+            if line :
+                img = Image.fromarray(frame)
+                draw = ImageDraw.Draw(img, 'RGBA')
+                draw.rectangle((0,y,text_size[0],y+text_size[1]),fill=bgcolor)
+                frame = np.array(img)
+            img = Image.fromarray(frame)
+            draw2 = ImageDraw.Draw(img)
+            draw2.text((0, y),line,font = font,fill = (255,255,255,255))
+            frame = np.array(img)
 
 
       out.write(frame)
@@ -134,10 +133,10 @@ def subtitle_generator(txt_pth,video_pth,fontnum,font_col_num,font_bg_num):
       # if cv2.waitKey(delay2) == 27:
       #    break
 
-def combine_audio(video_pth):
+def combine_audio(video_pth, file_name):
     videoclip = mp.VideoFileClip(MEDIA_ROOT+"/"+"no_voice.mp4") # 자막이 들어간 동영상 위치
     audioclip = mp.AudioFileClip(video_pth) # 원본 동영상 위치
 
     videoclip = videoclip.set_audio(audioclip)  
 
-    videoclip.write_videofile(MEDIA_ROOT+"/result/"+"result.mp4",codec='libx264',audio_codec='aac')
+    videoclip.write_videofile(MEDIA_ROOT+"/result/"+file_name,codec='libx264',audio_codec='aac')

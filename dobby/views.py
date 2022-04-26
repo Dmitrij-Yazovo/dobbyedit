@@ -1,3 +1,4 @@
+import datetime
 import os
 from urllib import response
 from django.shortcuts import redirect, render
@@ -17,19 +18,17 @@ def edit(request):
     if request.method == "POST":
         upload_file = request.FILES.get('e_file')
         name = upload_file.name 
-
+        request.session['file_name'] = name
         with open(MEDIA_ROOT+'/'+name, 'wb') as file: 
             for chunk in upload_file.chunks():
                 file.write(chunk)
 
         
-   
-        
     else:
         return render(request, "dobby/edit.html")
     
-    return render(request, "dobby/fun.html", {"upload_file": upload_file})
-    # return redirect("/dobby/fun/")
+    # return render(request, "dobby/fun.html", {"upload_file": upload_file})
+    return redirect("/dobby/fun/")
 
 
 def loading(request):
@@ -58,7 +57,7 @@ def result(request):
     #     file.save()
     # else:
     #     return render(request, "dobby/edit.html")
-    return render(request, "dobby/edit.html", {"file": file})
+    return render(request, "dobby/edit.html")
 
 def fun(request):
     global fontnum
@@ -66,14 +65,13 @@ def fun(request):
     global font_bg_num
     # return render(request,"dobby/fun.html")
     if request.method == "GET":
+        print(request.session['s_id'])
         return render(request,"dobby/fun.html")
-    
+        
     elif 'create' in request.POST:
         txt_pth = MEDIA_ROOT + "\\"+ "subtitle.txt"
-        video_pth = MEDIA_ROOT + "\\" + "media.mp4"
-      
-
-
+        video_pth = MEDIA_ROOT + "\\" + request.session['file_name']
+    
         font =  request.POST['font']
         if font == "font1":
             fontnum = 1
@@ -108,20 +106,43 @@ def fun(request):
         
         subtitle_fps(txt_pth,video_pth)
         subtitle_generator(txt_pth,video_pth,fontnum,font_col_num,font_bg_num)
-        combine_audio(video_pth)
+        combine_audio(video_pth, request.session['file_name'])
         
         
-        file_path = str(settings.BASE_DIR) + ('/media/%s' % file_name)
+        file_path = str(settings.BASE_DIR) + ('/media/%s' % request.session['file_name'])
+        rmv1 = str(settings.BASE_DIR) + ('/media/%s' % 'no_voice.mp4')
+        rmv2 = str(settings.BASE_DIR) + ('/media/%s' % 'subtitle.txt')
         os.remove(file_path)
+        os.remove(rmv1)
+        os.remove(rmv2)
+        
+        now = datetime.datetime.now()
+        
+        file = File(
+            file_name = request.session['file_name'],
+            member_id = Member.objects.get(member_id=request.session.get('s_id')),
+            file_root = video_pth,
+            file_date = now,
+        )
+        file.save()
 
     
     elif 'filter' in request.POST:
-        txt_pth = "C:/Users/User/Desktop/Big-pj/dobbyedit/dobby/static/result.txt"
-        video_pth = "C:/Users/User/Desktop/Big-pj/dobbyedit/dobby/static/media_ssiba.mp4"
-        filter_srt(txt_pth,video_pth)
-        total_filter(txt_pth,video_pth)
-        audio_pth = "C:/Users/User/Desktop/Big-pj/dobbyedit/dobby/static/one_final.mp3"
-        combine_audio2(audio_pth,video_pth)
+        # txt_pth = "C:/Users/User/Desktop/Big-pj/dobbyedit/dobby/static/result.txt"
+        # video_pth = "C:/Users/User/Desktop/Big-pj/dobbyedit/dobby/static/media_ssiba.mp4"
+        # filter_srt(txt_pth,video_pth)
+        # total_filter(txt_pth,video_pth)
+        # audio_pth = "C:/Users/User/Desktop/Big-pj/dobbyedit/dobby/static/one_final.mp3"
+        # combine_audio2(audio_pth,video_pth)
+        now = datetime.datetime.now()
+        
+        file = File(
+            file_name = request.session['file_name'],
+            member_id = Member.objects.get(member_id=request.session.get('s_id')),
+            file_root = video_pth,
+            file_date = now,
+        )
+        file.save()
 
     return render(request, 'dobby/result.html')
                     # # return render(request,"dobby/fun.html")

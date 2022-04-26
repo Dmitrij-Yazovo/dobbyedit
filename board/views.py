@@ -20,13 +20,19 @@ def post(request, post_no):
     if request.method == 'GET':
         post = Post.objects.get(post_no=post_no)
         comments = Comment.objects.filter(post_no=post_no)
-        postfile = Postfile.objects.get(post_no=post_no)
-        context = {
-            'post':post,
-            'comments':comments,
-            'postfile':postfile,
-        }
         
+        try:
+            postfile = Postfile.objects.get(post_no=post_no)
+            context = {
+                'post':post,
+                'comments':comments,
+                'postfile':postfile,
+            }
+        except Postfile.DoesNotExist:
+            context = {
+                'post':post,
+                'comments':comments,
+            }        
         return render(request, 'board/post.html', context)
     
     
@@ -47,7 +53,7 @@ def write(request):
     if request.method == 'POST':
         save_post_title = request.POST.get('postname')
         save_post_detail = request.POST.get('contents')
-        save_member_id = request.session.get('member_id')
+        save_member_id = Member.objects.get(member_id=request.session.get('s_id'))
         # uploadedFile= request.FILES.getlist("image")
         # save_member_id = 'Member object (test24)'
     
@@ -73,7 +79,7 @@ def write(request):
         #             file.write(chunk)
             
         # 글이 써지면 목록으로
-        return render(request, 'board/postlist/')
+        return redirect('/board/postlist/')
         
     else:
         # get 메서드    
