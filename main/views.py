@@ -14,6 +14,8 @@ def main(request):
     #     return redirect("/main/login/")
     
     return render(request,"main/main.html")
+# def main(request):
+#     return render(request,"main/main.html")
 
 # SIGNUP
 def signup(request):   

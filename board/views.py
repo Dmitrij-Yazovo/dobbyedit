@@ -1,5 +1,7 @@
 import datetime
 import json
+from django.core.paginator import Paginator
+from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from .models import Post, Member, Comment, Postfile
@@ -9,16 +11,32 @@ def postlist(request):
     s_id = request.session.get('s_id') # session id 유무 체크
     if s_id==None:
         return redirect("/main/login/")
-    
+
+    page = request.GET.get('page', '1')
+    search_keyword = request.GET.get('keyword', '')
+    search_type = request.GET.get('type', '')
     post_list = Post.objects.all()
+    
+    if search_type == 'all':
+        post_list = post_list.filter(Q(post_title__icontains=search_keyword) |
+                                    Q(post_detail__icontains=search_keyword) |
+                                    Q(member_id__member_id__icontains=search_keyword)
+                                    )
+    elif search_type == 'post_title':
+        post_list = post_list.filter(post_title__icontains=search_keyword)    
+    elif search_type == 'post_detail':
+        post_list = post_list.filter(post_detail__icontains=search_keyword)    
+    elif search_type == 'member_id':
+        post_list = post_list.filter(member_id__member_id__icontains=search_keyword)
+    
+    paginator = Paginator(post_list, 10)  # 페이지당 10개씩 보여주기
+    page_obj = paginator.get_page(page)
+    print(page_obj)
+
     count = len(post_list)
+    context = {'post_list': page_obj, 'page': page, 'keyword': search_keyword }
     
-    return render(
-        request,
-        'board/postlist.html',
-        {'post_list': post_list, 'count':count,}
-    )
-    
+    return render(request, 'board/postlist.html', context)
 
 def post(request, post_no):
     s_id = request.session.get('s_id') # session id 유무 체크
@@ -28,7 +46,7 @@ def post(request, post_no):
     if request.method == 'GET':
         post = Post.objects.get(post_no=post_no)
         comments = Comment.objects.filter(post_no=post_no)
-        
+
         try:
             postfile = Postfile.objects.get(post_no=post_no)
             context = {
@@ -41,6 +59,7 @@ def post(request, post_no):
                 'post':post,
                 'comments':comments,
             }        
+
         return render(request, 'board/post.html', context)
     
     
@@ -66,7 +85,8 @@ def write(request):
     if request.method == 'POST':
         save_post_title = request.POST.get('postname')
         save_post_detail = request.POST.get('contents')
-        save_member_id = Member.objects.get(member_id=request.session.get('s_id'))
+        s_id = request.session.get('s_id')
+        save_member_id = Member.objects.get(member_id=s_id)
         # uploadedFile= request.FILES.getlist("image")
         # save_member_id = 'Member object (test24)'
     
@@ -145,23 +165,23 @@ def comment_write(request, post_no):
     
     if request.method == 'POST':
         now = datetime.datetime.now()
-        save_member_id = request.session.get('s_id')
+        s_id = request.session.get('s_id')
         jsonObject = json.loads(request.body)
-        t_post_no = jsonObject.get('post_no')
+        # t_post_no = jsonObject.get('post_no')
         reply = Comment.objects.create(
             # 
-            save_post_no=Post.objects.get(post_no=t_post_no),
-            save_member_id=Member.objects.get(member_id=save_member_id),
+            post_no=Post.objects.get(post_no=post_no),
+            member_id=Member.objects.get(member_id=s_id),
             comment_detail=jsonObject.get('comment_detail'),
             comment_update = now
         )
         reply.save()
         
-        membername = Member.objects.get(member_id = save_member_id)
+        membername = Member.objects.get(member_id = s_id)
         context = {
             # 'name': serializers.serialize("json", reply.member_no),
             'content': reply.comment_detail,
-            'pp': membername.member_nick,    
+            'pp': membername.member_nick    
         }
 
         return JsonResponse(context)

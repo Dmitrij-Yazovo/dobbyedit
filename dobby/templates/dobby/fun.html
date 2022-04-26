@@ -113,33 +113,66 @@
         </div>
     </div>
     <div class="content">
-        <h3>{{request.session.file_name}}</h3>
+
+        <div id='mask' style='position:absolute; z-index:1; display:none; background-color:black; left:0%; top:-6%' >
+            <div id='loadingImg' style='display:block;'>
+                <img src='/static/assets/snap-dobby.gif' style='position: relative; width: 100%; height:auto; display:block;'/>
+            </div>
+        </div>
+        <script>
+            function LoadingWithMask(mask, loadingImg) {
+
+                //화면의 높이와 너비를 구합니다.
+                var maskHeight = document.body.clientHeight;
+                var maskWidth  = window.document.body.clientWidth;
+        
+                //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채웁니다.
+                mask.style.width = maskWidth;
+                mask.style.height = maskHeight;
+                mask.style.opacity = '0.5';
+              
+                //마스크 표시
+                mask.style.display = 'block';
+        
+                //로딩중 이미지 표시
+                loadingImg.style.display = 'block';
+            }
+        
+            // 로딩창 제거
+            function closeLoadingWithMask(mask, loadingImg) {
+                loadingImg.style.display = "none";
+                mask.style.display = "none";
+            }
+            function loadingDobby() {
+                var loadingImg = document.getElementById('loadingImg');
+                var mask = document.getElementById('mask');
+                LoadingWithMask(mask, loadingImg);
+            }
+        </script>
         <div class="fun-button">
             <form action="." method="POST">
                 {% csrf_token %} 
                     <div class="row1">
                     {% comment %} <button class="bt1" onclick="location.href='{%url 'main:main' %}'"> {% endcomment %}
-                        <input class="bt1" type="submit" name="create" value="Shorts 영상 만들기" class="btn btn-success"> 
-                        <input class="bt2" type="submit" name="create" value="제목 추천" class="btn btn-success"> 
-                        <input class="bt3" type="submit" name="filter" value="비속어 필터링" class="btn btn-success"> 
-
+                        <input id="btn" class="bt1" type="submit" name="shorts" value="Shorts 영상 만들기" class="btn btn-success" onclick="loadingDobby();"> 
+                        <input id="btn" class="bt2" type="submit" name="create" value="제목 추천" class="btn btn-success" onclick="loadingDobby();"> 
                         {% comment %} <input class="bt3" type="submit" name="create" value="자막 넣기" class="btn btn-success">  {% endcomment %}
+                        <input id="btn" class="bt3" type="submit" name="filter" value="비속어 필터링" class="btn btn-success" onclick="loadingDobby();"> 
                     </div>
-            </form>
+                </form>
                     <div class="row2">
                         <form class="bt4form" action="." method="POST">
                             {% csrf_token %} 
-                            {% comment %} <strong>Shorts 영상 만들기</strong> {% endcomment %}
-                            <input class="bt4" type="submit" name="filter" value="썸네일 추천" class="btn btn-success">
+                        {% comment %} <strong>Shorts 영상 만들기</strong> {% endcomment %}
+                            <input id="btn" class="bt4" type="submit" name="filter" value="썸네일 추천" class="btn btn-success" onclick="loadingDobby();">
                         </form> 
                         <button class="bt5" id="btn-modal">자막 넣기</button>
                     </div>
         </div>
-       {% comment %} <button id="btn-modal"></button> {% endcomment %}
         <div id="modal" class="modal-overlay">
             <div class="modal-window">
                     <form  method="POST"  action="." style="text-align: center;margin-top:40px;">
-                        {% csrf_token %} 
+                        {% csrf_token %}
                         <h3>옵션을 선택해주세요!</h3>
 
                         <input type="hidden" value="{{request.session.file_name}}">
@@ -167,11 +200,36 @@
                         <div id='result3'></div>
                         <div class="btn-footer">
                         <button type="button" class="btn btn-primary closebtn" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" name="create">Save changes</button>
+                        <button id="btn" type="submit" name="create" class="btn btn-primary" onclick="loadingDobby();">Save changes</button>
                         </div>
                     </form>
             </div>          
         </div>
+        {% comment %} <div id="wrap-loading" style="z-index: 1;">
+          <h1 style="display: inline;">Loading...</h1>
+          <img src="/static/assets/snap-dobby.gif" alt="Loading..." />
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#btn").click(function () {
+                    $.ajax({
+                        //url: "/dobby/fun/",
+                        data: {},
+                        //data: {},
+                        success: function () {
+                        //$("body").append(data);
+                        },
+                        beforeSend: function () {
+                        $("#wrap-loading").show();
+                        },
+                        complete: function () {
+                        $("#wrap-loading").hide();
+                        },
+                    });
+                });
+            });
+        </script> {% endcomment %}
     </div>
 
     <div class="foot">
