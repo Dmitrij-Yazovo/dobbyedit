@@ -3,25 +3,157 @@
 <html lang="ko">
 
 <head>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <!-- Google Icon -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+        rel="stylesheet">
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main</title>
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-</head>
+    <link href = "https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel = "stylesheet">
+    <link rel = "stylesheet" href = "/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/default.css">
+    <link rel="stylesheet" href="/static/css/firstscene.css">
 
+</head>
+<body class="before-load">
+	<div class="loading">
+		<svg class="loading-circle">
+			<circle cx="50%" cy="50%" r="25"></circle>
+		</svg>
+	</div>
+	<div class="container">
+		<section class="scroll-section" id="scroll-section-0">
+			<h1>EditDobby</h1>
+			<object class="sticky-elem logo" data="/static/assets/logo.svg" type="image/svg+xml"></object>
+			<div class="sticky-elem main-message a">
+				<p>편집의</p>
+			</div>
+			<span class="sticky-elem ribbon-path">
+				<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 450">
+					<path class="st1" d="M709,41.5c-194,38-387,122-455,159c-64.13,34.89-73.4,42.42,20,26c82.5-14.5,126.34-33.68,185-38 c47.5-3.5,69.22,7.98-11,39c-75,29-251,98-459,169"></path>
+				</svg>
+			</span>
+			<div class="sticky-elem main-message b">
+				<p>혁신</p>
+			</div>
+		</section>
+		<div class="normal-content" style = "text-align: center">
+			<section>
+				<p class="mid-message">
+					EditDobby를 소개합니다
+				</p>
+			</section>
+		</div>
+	</div>
+
+	<script src = "/static/js/firstscene.js"></script>
+</body>
 <body>
-    <div class='maindobby'>
-        <div class="nv">
-            <div class="navleft">
-                <h1>
-                    <a href="{%url 'main:main' %}">DOBBYEDIT</a>
-                </h1>
+    <section class = "scroll-content">
+        <div class = "scroll-graphic">
+            <div class = "graphic-item"><img class ="scene-img" src = "/static/assets/coffee.png" alt = ""></div>
+            <div class = "graphic-item"><img class ="scene-img" src = "/static/assets/train.png" alt = ""></div>
+            <div class = "graphic-item"><img class = "scene-img" src = "/static/assets/city.png" alt=""></div>
+            <div class = "graphic-item" data-action="birdFly">
+                <img class = "bird" src = "/static/assets/bird.gif" alt = "">
+                <img class = "scene-img" src = "/static/assets/city.png" alt = "">
             </div>
-            {% comment %} <div class="navcenter"></div> {% endcomment %}
-            <div class="navright">
+            <div class = "graphic-item"><img class = "scene-img" src = "/static/assets/computer.png" alt = ""></div>
+            <div class = "graphic-item"><img class = "scene-img" src = "/static/assets/eat.png" alt=""></div>
+            <div class = "graphic-item" data-action = "birdFly2">
+                <img class = "bird" src = "/static/assets/bird.gif" alt ="">
+                <img class = "scene-img" src = "/static/assets/eat.png" alt = "">
+            </div>
+            <div class = "graphic-item"><img class = "scene-img" src = "/static/assets/computer.png" alt = ""></div>
+            <div class = "graphic-item"><img class = "scene-img" src = "/static/assets/think.png" alt = ""></div>
+            <div class = "graphic-item"><img class = "scene-img" src = "/static/assets/dobby.gif" alt = ""></div>
+        </div>
+
+        <!-- scroll-text global-width는 스크롤 될때 말풍선이 담기는 곳 -->
+        <div class = "scroll-text global-width">
+            <div class = "step">
+                <p>
+                    오늘도 하루가 시작된다.
+                    아침에 일어나면<br> 커피를 내리며 정신을 차린다.
+                </p>
+            </div>
+            <div class = "step">
+                <p>
+                    지하철을 타며 또 다시 직장으로 나가는 <br>일상이 반복된다.
+                    
+                </p>
+            </div>
+            <div class = "step">
+                <p>
+                    직장을 다니는 것도 좋지만 유튜버를 하며<br>취미까지 같이 즐기고싶은데...<br>
+                    방법이 없으려나...?
+                </p>
+            </div>
+            <div class = "step">
+                <p>
+                    근데 지금도 바쁜데 촬영하고 편집까지 <br>언제 다하냐
+                </p>
+            </div>
+            <div class = "step">
+                <p>
+                    출근 후 오늘의 업무를 시작한다.
+                </p>
+            </div>
+            <div class = "step">
+                <p>
+                    어느덧 점심시간<br>
+                    밥을 먹으면서도 유튜버를 해볼까 하는 <br>생각이 머리 속에서 계속 맴돈다.
+                </p>
+            </div>
+            <div class = "step">
+                <p>
+                    브이로그를 만들거나 재밌는 영상을 찍어서<br>
+                    취미도 즐기고 돈도 벌고 좋을거같은데...
+                </p>
+            </div>
+            <div class = "step">
+                <p>
+                    근데 시간도 부족한데 촬영하고 편집까지 <br>언제 다하지
+                    그리고 막상 어떻게 시작할지도 모르겠어...
+                </p>
+            </div>
+            <div class = "step">
+                <p>
+                    아직도 영상편집을 어떻게할지 몰라서 <br>막연하게 유튜브해볼까 생각중인가요?<br>
+                    걱정마세요.
+                </p>
+            </div>
+            <div class = "step">
+                <p>
+                    EditDobby가 도와줄게요.
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- normal-content global-width는 스크롤 효과가 끝나고 밑에 나오는 텍스트 -->
+    <section class = "normal-content global-width">
+        <h2>재능을 낭비하지 말아요</h2>
+        <p>여러분의 재능을 마음껏 펼치세요<br> 크리에이터로 발돋움을 도와드릴게요</p><br>
+        <h2>도비가 도와줄게요!</h2>
+        <p>막상 하려니 촬영부터 편집까지 막막하시나요? <br>도비가 편집을 도와드릴게요<br>여러분은 촬영만 재밌게 하시면 된다구요</p><br>
+        <h2>내일은 더 나은 모습으로</h2>
+        <p>하루하루 자신의 재능을 펼치면 더 나은 내일이 <br>오지않을까요?</p>
+    </section>
+    <div class="foot">
+        <div style = "text-align:center;">
+            <h4>
+                <p style = "color : black;">Contact webmaster for more information. 010-지기지기-기용기용</p>
+            </h4>
+            <div class="nv">
+                <div style = "text-align:right;">
                 <li class=nav_item>    
-                    <a href="{%url 'dobby:edit' %}">영상편집</a>
+                    <a href="{%url 'dobby:edit' %}" style="color: white"><span class="material-icons" style="padding-right: 5px">camera-reels</span></a>
                 </li>
                 <li class="divider"></li>
                 <li class=nav_item>    
@@ -31,66 +163,10 @@
                 <li class=nav_item>    
                     <a href="{%url 'main:my' %}">MY</a>
                 </li>
+                </div>
             </div>
         </div>
     </div>
-    <div class="content">
-        <div class="menu-button">
-            <div class="row1">
-                <div>
-                    <strong>Our Service</strong>
-                </div>
-            </div>
-            <div class="row2">
-                <button class="bt1" onclick="location.href='{%url 'dobby:edit' %}'">
-                    <strong>영상편집</strong>
-                </button>
-                <button class="bt2" onclick="location.href='{%url 'board:postlist' %}'">
-                    <div>
-                        <strong>게시판</strong>
-                    </div>
-                </button>
-                <button class="bt3" onclick="location.href='{%url 'main:my' %}'">
-                    <div>
-                        <strong>My page</strong>
-                    </div>
-                </button>
-            </div>
-        </div>
-    </div>
-    <div class="aboutus">
-        <div class="intro">
-            <div class="row1">
-                <div>
-                    <strong>About us</strong>
-                </div>
-            </div>
-            <div class="row2">
-                <div class="container">
-                    <img src='/static/assets/about.png' style="width: 700px; min-width: 140px;">
-                </div>
-                <div>
-                </div>    
-            </div>
-        </div>
-    </div>
-    <div class="foot">
-        <div class="footleft">
-            <h1>
-                <strong>DOBBYEDIT</strong>
-            </h1>
-        </div>
-        <div class="footright">
-            <div class='copyright'>
-                <h4>
-                    <strong>Contact webmaster for more information. 010-지기지기-기용기용</strong>
-                </h4>
-            </div>
-            <button class="footbtn1" onclick="location.href='{%url 'main:main' %}'">
-            </button>
-            <button class="footbtn2" onclick="location.href='{%url 'main:main' %}'">
-            </button>
-        </div>
-    </div>  
+    <script src = "/static/js/main.js"></script>
 </body>
 </html>

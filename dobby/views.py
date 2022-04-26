@@ -15,6 +15,10 @@ from .models import File, Inputfile
 
 # Create your views here.
 def edit(request):
+    s_id = request.session.get('s_id') # session id 유무 체크
+    if s_id==None:
+        return redirect("/main/login/")
+    
     if request.method == "POST":
         upload_file = request.FILES.get('e_file')
         name = upload_file.name 
@@ -37,6 +41,10 @@ def loading(request):
 
 
 def result(request):
+    s_id = request.session.get('s_id') # session id 유무 체크
+    if s_id==None:
+        return redirect("/main/login/")
+    
     # if request.method == "POST":
     #     uploadedFile = request.FILES.get("file")
     #     save_member_id = Member.objects.get(member_id = request.session['s_id'])
@@ -60,6 +68,11 @@ def result(request):
     return render(request, "dobby/edit.html")
 
 def fun(request):
+    s_id = request.session.get('s_id') # session id 유무 체크
+    if s_id==None:
+        return redirect("/main/login/")
+    
+    
     global fontnum
     global font_col_num
     global font_bg_num
