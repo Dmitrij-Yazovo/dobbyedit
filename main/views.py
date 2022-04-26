@@ -9,11 +9,13 @@ from dobby.models import File
 
 # HOME
 def main(request):
-    # s_id = request.session.get('s_id') # session id 유무 체크
-    # if s_id==None:
-    #     return render(request, "main/login.html")
+    s_id = request.session.get('s_id') # session id 유무 체크
+    if s_id==None:
+        return redirect("/main/login/")
     
     return render(request,"main/main.html")
+# def main(request):
+#     return render(request,"main/main.html")
 
 # SIGNUP
 def signup(request):   

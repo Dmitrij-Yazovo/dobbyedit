@@ -4,18 +4,18 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main</title>
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link href = "https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel = "stylesheet">
+    <link rel = "stylesheet" href = "/static/css/main.css">
 </head>
-
 <body>
     <div class='maindobby'>
         <div class="nv">
             <div class="navleft">
                 <h1>
-                    <a href="{%url 'main:main' %}">DOBBYEDIT</a>
+                    <a href="{%url 'main:main' %}">EditDobby <br> 우리는 1인 크리에이터분들을 응원합니다.</a>
                 </h1>
             </div>
             {% comment %} <div class="navcenter"></div> {% endcomment %}
@@ -34,63 +34,113 @@
             </div>
         </div>
     </div>
-    <div class="content">
-        <div class="menu-button">
-            <div class="row1">
-                <div>
-                    <strong>Our Service</strong>
-                </div>
+    <section class = "scroll-content">
+        <div class = "scroll-graphic">
+            <div class = "graphic-item"><img class ="scene-img" src = "/static/assets/coffee.png" alt = ""></div>
+            <div class = "graphic-item"><img class ="scene-img" src = "/static/assets/train.png" alt = ""></div>
+            <div class = "graphic-item"><img class = "scene-img" src = "/static/assets/city.png" alt=""></div>
+            <div class = "graphic-item" data-action="birdFly">
+                <img class = "bird" src = "/static/assets/bird.gif" alt = "">
+                <img class = "scene-img" src = "/static/assets/city.png" alt = "">
             </div>
-            <div class="row2">
-                <button class="bt1" onclick="location.href='{%url 'dobby:edit' %}'">
-                    <strong>영상편집</strong>
-                </button>
-                <button class="bt2" onclick="location.href='{%url 'board:postlist' %}'">
-                    <div>
-                        <strong>게시판</strong>
-                    </div>
-                </button>
-                <button class="bt3" onclick="location.href='{%url 'main:my' %}'">
-                    <div>
-                        <strong>My page</strong>
-                    </div>
-                </button>
+            <div class = "graphic-item"><img class = "scene-img" src = "/static/assets/computer.png" alt = ""></div>
+            <div class = "graphic-item"><img class = "scene-img" src = "/static/assets/eat.png" alt=""></div>
+            <div class = "graphic-item" data-action = "birdFly2">
+                <img class = "bird" src = "/static/assets/bird.gif" alt ="">
+                <img class = "scene-img" src = "/static/assets/eat.png" alt = "">
+            </div>
+            <div class = "graphic-item"><img class = "scene-img" src = "/static/assets/computer.png" alt = ""></div>
+            <div class = "graphic-item"><img class = "scene-img" src = "/static/assets/think.png" alt = ""></div>
+            <div class = "graphic-item"><img class = "scene-img" src = "/static/assets/dobby.gif" alt = ""></div>
+        </div>
+        <!-- scroll-text global-width는 스크롤 될때 말풍선이 담기는 곳 -->
+        <div class = "scroll-text global-width">
+            <div class = "step">
+                <p>
+                    오늘도 하루가 시작된다.
+                    아침에 일어나면, 커피를 내리며 정신을 차린다.
+                </p>
+            </div>
+            <div class = "step">
+                <p>
+                    지하철을 타며 또 다시 직장으로 나가는 일상이 반복된다.
+                    
+                </p>
+            </div>
+            <div class = "step">
+                <p>
+                    직장다니는 것도 좋지만, 유튜버를 하면서 취미도 같이 즐기고싶은데...<br>
+                    방법이 없나?
+                </p>
+            </div>
+            <div class = "step">
+                <p>
+                    근데 지금도 바쁜데 촬영하고 편집까지 언제 다하냐
+                </p>
+            </div>
+            <div class = "step">
+                <p>
+                    출근 후 오늘의 업무를 시작한다.
+                </p>
+            </div>
+            <div class = "step">
+                <p>
+                    어느덧 점심시간<br>
+                    밥을 먹으면서도 유튜버를 해볼까 하는 생각이 머리 속에서 계속 맴돈다.
+                </p>
+            </div>
+            <div class = "step">
+                <p>
+                    내 하루를 촬영해서 브이로그를 만들어보거나 가끔 재밌는 영상을 찍어서<br>
+                    취미도 즐기고 쏠쏠한 용돈벌이처럼 발전시켜도 좋을거같은데...
+                </p>
+            </div>
+            <div class = "step">
+                <p>
+                    근데 촬영하고 편집까지 시간도 부족한데 언제 다해<br>
+                    그리고 막상 어떻게 시작해야할지도 모르겠어...
+                </p>
+            </div>
+            <div class = "step">
+                <p>
+                    아직도 영상편집을 어떻게할지 몰라서 막연하게 유튜브해볼까 생각중인가요?<br>
+                    걱정마세요.
+                </p>
+            </div>
+            <div class = "step">
+                <p>
+                    EditDobby가 도와줄께요
+                </p>
             </div>
         </div>
-    </div>
-    <div class="aboutus">
-        <div class="intro">
-            <div class="row1">
-                <div>
-                    <strong>About us</strong>
-                </div>
+    </section>
+    <!-- normal-content global-width는 스크롤 효과가 끝나고 밑에 나오는 텍스트 -->
+    <section class = "normal-content global-width">
+        <h2>여러분의 재능을 낭비하지 말아요</h2>
+        <p>내 재능을 펼치지 못하고 업무에만 갖혀있는 사람들. 크리에이터로 겸업은 어떨까요?</p>
+        <h2>도비가 도와줄께요!</h2>
+        <p>막상 하려니 촬영부터 편집까지 막막하시나요? 도비가 편집을 도와드릴께요. <br>여러분은 촬영만 재밌게 하시면 된다구요.</h2>
+        <h2>내일은 더 나은 모습으로</h2>
+        <p>하루하루 자신의 재능을 펼치면 더 나은 내일이 오지않을까요?</p>
+    </section>
+    <div class="footright">
+        <div class='copyright'>
+            <h4>
+                <p style = "color : black;">Contact webmaster for more information. 010-지기지기-기용기용</p>
+            </h4>
+            <div class="navright">
+                <li class=nav_item>    
+                    <a href="{%url 'dobby:edit' %}">영상편집</a>
+                </li>
+                <li class="divider"></li>
+                <li class=nav_item>    
+                    <a href="{%url 'board:postlist' %}">게시판</a>
+                </li>
+                <li class="divider"></li>
+                <li class=nav_item>    
+                    <a href="{%url 'main:my' %}">MY</a>
+                </li>
             </div>
-            <div class="row2">
-                <div class="container">
-                    <img src='/static/assets/about.png' style="width: 700px; min-width: 140px;">
-                </div>
-                <div>
-                </div>    
-            </div>
-        </div>
-    </div>
-    <div class="foot">
-        <div class="footleft">
-            <h1>
-                <strong>DOBBYEDIT</strong>
-            </h1>
-        </div>
-        <div class="footright">
-            <div class='copyright'>
-                <h4>
-                    <strong>Contact webmaster for more information. 010-지기지기-기용기용</strong>
-                </h4>
-            </div>
-            <button class="footbtn1" onclick="location.href='{%url 'main:main' %}'">
-            </button>
-            <button class="footbtn2" onclick="location.href='{%url 'main:main' %}'">
-            </button>
-        </div>
-    </div>  
+    <script src = "/static/js/main.js"></script>
 </body>
 </html>
