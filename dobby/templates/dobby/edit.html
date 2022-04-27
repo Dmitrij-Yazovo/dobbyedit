@@ -98,58 +98,23 @@
     </div>
 
 
-    <form action="{% url 'dobby:edit' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="file" name="e_file">
-        <input type="submit" value="전송">
-    </form>
-
-
-
-
-
-
     <div class="content">
         <div class="upload-button">
-            <div class="row2">
+            <div class="row2">   
                 {% comment %} if문: 동영상없으면 input form {% endcomment %}
                 <div class="filebox">
-                    <label for="file">
+                    <label for="input-file">
                         <strong>동영상을 넣어주세요</strong>
                     </label> 
-                    <form action="{% url 'dobby:edit'%}" method="post" entype="multipart/form-data">
+                    <form action="{% url 'dobby:edit' %}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <input type="file" id="file" name="edit_file">
-                        {% comment %} <input type='submit' class='bt1'/> {% endcomment %}
-                        <div class="fun">
-                            <input type='submit' class='bt1'/>
+                        <input type="file" id="input-file" name="e_file" style="display:none;">
+                        <div class='fun'>
+                            <input type="submit" value="전송">
                         </div>
                     </form>
                 </div>
-                
-                {% comment %} else문: 동영상있을시 쇼츠 or 썸네일추출 선택 {% endcomment %}
-                {% comment %} <div id="container">
-                    <h2>Lorem Ipsum</h2>
-                    <div id="lorem-ipsum"></div>
-                </div> {% endcomment %}
-                {% comment %} <button id="btn-modal"></button>
-                <div id="modal" class="modal-overlay">
-                    <div class="modal-window">
-                        <div class="title">
-                            <h2>모달</h2>
-                        </div>
-                        <div class="close-area">X</div>
-                        <div class="content">
-                            <p>가나다라마바사 아자차카타파하</p>
-                            <p>가나다라마바사 아자차카타파하</p>
-                            <p>가나다라마바사 아자차카타파하</p>
-                            <p>가나다라마바사 아자차카타파하</p>
-                            
-                        </div>
-                    </div>
-                </div> {% endcomment %}
             </div>
-            
         </div>
     </div>
     <div class="foot">
