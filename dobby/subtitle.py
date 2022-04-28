@@ -127,4 +127,4 @@ def combine_audio(video_pth, file_name):
 
     videoclip = videoclip.set_audio(audioclip)  
 
-    videoclip.write_videofile(MEDIA_ROOT+"/result/"+file_name,codec='libx264',audio_codec='aac')
+    videoclip.write_videofile(MEDIA_ROOT+"/subtitle/"+file_name,codec='libx264',audio_codec='aac')

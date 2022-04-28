@@ -108,25 +108,29 @@ def fun(request):
         file = File(
             file_name = request.session['file_name'],
             member_id = Member.objects.get(member_id=request.session.get('s_id')),
-            file_root = video_pth,
+            file_root = "\\media\\subtitle\\" + request.session['file_name'],
             file_date = now,
         )
         file.save()
 
     
     elif 'filter' in request.POST:
-        # txt_pth = "C:/Users/User/Desktop/Big-pj/dobbyedit/dobby/static/result.txt"
-        # video_pth = "C:/Users/User/Desktop/Big-pj/dobbyedit/dobby/static/media_ssiba.mp4"
-        # filter_srt(txt_pth,video_pth)
-        # total_filter(txt_pth,video_pth)
-        # audio_pth = "C:/Users/User/Desktop/Big-pj/dobbyedit/dobby/static/one_final.mp3"
-        # combine_audio2(audio_pth,video_pth)
+        txt_pth = MEDIA_ROOT + "\\"+ "result.txt"  # 필터링 음성추출파일 
+        video_pth = MEDIA_ROOT + "\\" + request.session['file_name']
+ 
+        
+        filter_srt(txt_pth,video_pth)
+        total_filter(txt_pth,video_pth)
+        
+        audio_pth =  MEDIA_ROOT + "\\" + "filter_audio.mp3"
+        combine_audio2(audio_pth,video_pth,request.session['file_name'])
+        
         now = datetime.datetime.now()
         
         file = File(
             file_name = request.session['file_name'],
             member_id = Member.objects.get(member_id=request.session.get('s_id')),
-            file_root = video_pth,
+            file_root = "\\media\\filter\\" + request.session['file_name'],
             file_date = now,
         )
         file.save()

@@ -1,3 +1,4 @@
+from config.settings import MEDIA_ROOT
 from dobby.clova import ClovaSpeechClient
 import moviepy.editor as mp
 import re
@@ -23,7 +24,7 @@ def filter_audio(start, end, video_pth):
     
     audios = []
     audio = mp.AudioFileClip(video_pth)
-    filter_audio = mp.AudioFileClip('C:/django/dobbyedit/dobbyedit/dobby/static/filter.mp3')
+    filter_audio = mp.AudioFileClip('/dobby/static/filter.mp3')
 
     if len(start) < 2:
        start =  '0' + start
@@ -41,7 +42,7 @@ def filter_audio(start, end, video_pth):
     audios.append(end_audio)
 
     audioClips = mp.concatenate_audioclips([audio for audio in audios])
-    audioClips.write_audiofile("C:/django/dobbyedit/dobbyedit/dobby/static/one_final.mp3")
+    audioClips.write_audiofile(MEDIA_ROOT+"/"+"filter_audio.mp4")
 
 def total_filter(txt_pth, video_pth):
   with open (txt_pth,encoding='cp949') as f:
@@ -59,11 +60,11 @@ def total_filter(txt_pth, video_pth):
 
 
 
-def combine_audio2(audio_pth,video_pth):
+def combine_audio2(audio_pth,video_pth,file_name):
 
   videoclip = mp.VideoFileClip(video_pth) 
   audioclip = mp.AudioFileClip(audio_pth) 
 
 
   videoclip = videoclip.set_audio(audioclip) 
-  videoclip.write_videofile("C:/django/dobbyedit/dobbyedit/dobby/static/new_test4.mp4",codec='libx264',audio_codec='aac')
+  videoclip.write_videofile(MEDIA_ROOT+"/filter/"+file_name,codec='libx264',audio_codec='aac')

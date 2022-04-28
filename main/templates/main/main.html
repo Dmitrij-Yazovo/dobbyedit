@@ -83,7 +83,11 @@
                 <ul class="tit en animate" data-animate="motion">
                     <li><a href="{%url 'dobby:edit' %}"><span><b>영상편집</b></span></a></li>
                     <li><a href="{%url 'board:postlist' %}"><span><b>게시판</b></span></a></li>
-                    <li><a href="{%url 'main:my' %}"><span><b>My</b></span></a></li>
+                    {% if request.session.s_id %}
+                    <li><a href="{%url 'main:my' %}"><span><b>My page</b></span></a></li>
+                    {% else %}
+                    <li><a href="{%url 'main:login' %}"><span><b>login</b></span></a></li>
+                    {% endif %}
                     <li><a href="{%url 'dobby:fun' %}"><span><b>function</b></span></a></li>
                 </ul>
             </div>
