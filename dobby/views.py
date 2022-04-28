@@ -36,28 +36,9 @@ def result(request):
     s_id = request.session.get('s_id') # session id 유무 체크
     if s_id==None:
         return redirect("/main/login/")
-    
-    # if request.method == "POST":
-    #     uploadedFile = request.FILES.get("file")
-    #     save_member_id = Member.objects.get(member_id = request.session['s_id'])
-    #     filename = uploadedFile.name
-    #     file_root = os.path.join(MEDIA_ROOT)
-        
-        
-        
 
-    #     file = File(
-    #         file_name = filename,
-    #         file_root = file_root,
-    #         member_id = save_member_id
-    #     )
-    #     with open(name, 'wb') as file: # 파일 저장
-    #         for chunk in upload_file.chunks():
-    #         file.write(chunk)
-    #     file.save()
-    # else:
-    #     return render(request, "dobby/edit.html")
-    return render(request, "dobby/edit.html")
+    return render(request, 'dobby/result.html')
+
 
 
 
@@ -150,7 +131,7 @@ def fun(request):
         )
         file.save()
 
-    return render(request, 'dobby/result.html')
+    return render(request, 'dobby/result.html', {'file':file})
                     # # return render(request,"dobby/fun.html")
                     # if request.method == "GET":
                         

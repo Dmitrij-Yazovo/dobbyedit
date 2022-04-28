@@ -85,7 +85,7 @@ DATABASES = {
     # db환경설정
     'custom': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'test90',
+        'NAME': 'test99',
         'USER': 'root',
         'PASSWORD': '1234',
         'HOST': 'localhost',

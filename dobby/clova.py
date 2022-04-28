@@ -5,9 +5,9 @@ import io
 
 class ClovaSpeechClient:
     # Clova Speech invoke URL
-    invoke_url = 'https://clovaspeech-gw.ncloud.com/external/v1/2515/45ad113fe857520d01f7debdce76f2fa0468fefa7b13ff091beb960ce2950efa'
+    invoke_url = 'https://clovaspeech-gw.ncloud.com/external/v1/2567/42ee816227b8a83b1453e2b3df75f3f9b9012a328d19a5e0ec876f68a9e90eed'
     # Clova Speech secret key
-    secret = '395be196a5f949d9a9b375cb0702fd55'
+    secret = 'd1b187aa675c4087bb55de56372a4627'
 
     def req_url(self, url, completion, callback=None, userdata=None, forbiddens=None, boostings=None, wordAlignment=True, fullText=True, diarization=None):
         request_body = {

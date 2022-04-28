@@ -19,6 +19,7 @@
     <link rel = "stylesheet" href = "/static/css/main.css">
     <link rel="stylesheet" href="/static/css/default.css">
     <link rel="stylesheet" href="/static/css/firstscene.css">
+    <script src="/static/js/jquery-3.3.1.min.js"></script>
 
 </head>
 <body class="before-load">
@@ -54,7 +55,6 @@
 
 	<script src = "/static/js/firstscene.js"></script>
 </body>
-<body>
     <section class = "scroll-content">
         <div class = "scroll-graphic">
             <div class = "graphic-item"><img class ="scene-img" src = "/static/assets/coffee.png" alt = ""></div>
@@ -74,18 +74,33 @@
             <div class = "graphic-item"><img class = "scene-img" src = "/static/assets/think.png" alt = ""></div>
             <div class = "graphic-item"><img class = "scene-img" src = "/static/assets/dobby.gif" alt = ""></div>
         </div>
-
+    <div class="wrap">
+        <div class="menuOpen">
+            <button class="open"><img src="/static/assets/open-icon.png" alt="메뉴열기"></button>
+            <div class="menuWrap">
+                <a href="#" class="close"><img src="/static/assets/close.png" alt=""></a>
+                <a href="#" class="close en">close</a>
+                <ul class="tit en animate" data-animate="motion">
+                    <li><a href="{%url 'dobby:edit' %}"><span><b>영상편집</b></span></a></li>
+                    <li><a href="{%url 'board:postlist' %}"><span><b>게시판</b></span></a></li>
+                    <li><a href="{%url 'main:my' %}"><span><b>My</b></span></a></li>
+                    <li><a href="{%url 'dobby:fun' %}"><span><b>function</b></span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src = "/static/js/navi.js"></script>
         <!-- scroll-text global-width는 스크롤 될때 말풍선이 담기는 곳 -->
         <div class = "scroll-text global-width">
             <div class = "step">
                 <p>
-                    오늘도 하루가 시작된다.
-                    아침에 일어나면<br> 커피를 내리며 정신을 차린다.
+                    오늘도 하루가 시작된다
+                    아침에 일어나면<br> 커피를 내리며 정신을 차린다
                 </p>
             </div>
             <div class = "step">
                 <p>
-                    지하철을 타며 또 다시 직장으로 나가는 <br>일상이 반복된다.
+                    지하철을 타며 또 다시 직장으로 나가는 <br>일상이 반복된다
                     
                 </p>
             </div>
@@ -97,23 +112,23 @@
             </div>
             <div class = "step">
                 <p>
-                    근데 지금도 바쁜데 촬영하고 편집까지 <br>언제 다하냐
+                    근데 지금도 바쁜데 촬영하고 편집까지 <br>할 수 있을까?
                 </p>
             </div>
             <div class = "step">
                 <p>
-                    출근 후 오늘의 업무를 시작한다.
+                    출근 후 오늘의 업무를 시작한다
                 </p>
             </div>
             <div class = "step">
                 <p>
                     어느덧 점심시간<br>
-                    밥을 먹으면서도 유튜버를 해볼까 하는 <br>생각이 머리 속에서 계속 맴돈다.
+                    밥을 먹으면서도 유튜버를 해볼까 하는 <br>생각이 머리 속에서 계속 맴돈다
                 </p>
             </div>
             <div class = "step">
                 <p>
-                    브이로그를 만들거나 재밌는 영상을 찍어서<br>
+                    브이로그를 만들거나 재밌는 영상을 찍으면<br>
                     취미도 즐기고 돈도 벌고 좋을거같은데...
                 </p>
             </div>
@@ -126,12 +141,12 @@
             <div class = "step">
                 <p>
                     아직도 영상편집을 어떻게할지 몰라서 <br>막연하게 유튜브해볼까 생각중인가요?<br>
-                    걱정마세요.
+                    걱정마세요
                 </p>
             </div>
             <div class = "step">
                 <p>
-                    EditDobby가 도와줄게요.
+                    EditDobby가 도와줄게요
                 </p>
             </div>
         </div>
@@ -145,29 +160,28 @@
         <h2>내일은 더 나은 모습으로</h2>
         <p>하루하루 자신의 재능을 펼치면 더 나은 내일이 <br>오지않을까요?</p>
     </section>
-    <div class="foot">
-        <div style = "text-align:center;">
-            <h4>
-                <p style = "color : black;">Contact webmaster for more information. 010-지기지기-기용기용</p>
-            </h4>
-            <div class="nv">
-                <div style = "text-align:right;">
-                <li class=nav_item>    
-                    <a href="{%url 'dobby:edit' %}" style="color: white"><span class="material-icons" style="padding-right: 5px">camera-reels</span></a>
-                </li>
-                <li class="divider"></li>
-                <li class=nav_item>    
-                    <a href="{%url 'board:postlist' %}">게시판</a>
-                </li>
-                <li class="divider"></li>
-                <li class=nav_item>    
-                    <a href="{%url 'main:my' %}">MY</a>
-                </li>
-                </div>
+    <footer>
+        <div class="foot">
+            <div class="footleft">
+                <h4>
+                    DOBBYEDIT
+                </h4>
             </div>
-        </div>
-    </div>
-
+            <div class="footright">
+                <div class='copyright'>
+                    <h4>
+                        Contact webmaster for more information. <br>
+                        010-지기지기-기용기용
+                    </h4>
+                </div>
+                <button class="footbtn1" onclick="window.open('https://github.com/AIVLE-School-first-Big-Project/EditDobby.git')">
+                </button>
+                <button class="footbtn2" onclick="window.open('https://github.com/AIVLE-School-first-Big-Project/EditDobby.git')">
+                </button>
+            </div>
+        </div>  
+    </footer>
     <script src = "/static/js/main.js"></script>
+
 </body>
 </html>
