@@ -25,7 +25,7 @@ def signup(request):
     elif request.method == "POST":
         form = Member(member_id=request.POST['member_id'], member_email=request.POST['member_email'],
                       member_password=request.POST['member_password'], member_joindate=timezone.localtime(),
-                      member_nick=request.POST['member_nick']
+                      member_nick=request.POST['member_nick'], member_status=0,
                     )
         form.save()
     return redirect("/main/login/")
