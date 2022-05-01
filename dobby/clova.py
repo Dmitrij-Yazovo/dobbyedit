@@ -12,8 +12,8 @@ class ClovaSpeechClient:
     def req_url(self, url, completion, callback=None, userdata=None, forbiddens=None, boostings=None, wordAlignment=True, fullText=True, diarization=None):
         request_body = {
             'url': url,
-            # 'language': 'ko-KR',
-            'language': 'en-US',
+            'language': 'ko-KR',
+            # 'language': 'en-US',
             'completion': completion,
             'callback': callback,
             'userdata': userdata,
@@ -36,8 +36,8 @@ class ClovaSpeechClient:
                            wordAlignment=True, fullText=True, diarization=None):
         request_body = {
             'dataKey': data_key,
-            # 'language': 'ko-KR',
-            'language': 'en-US',
+            'language': 'ko-KR',
+            # 'language': 'en-US',
             'completion': completion,
             'callback': callback,
             'userdata': userdata,
@@ -59,8 +59,8 @@ class ClovaSpeechClient:
     def req_upload(self, file, completion, callback=None, userdata=None, forbiddens=None, boostings=None,
                    wordAlignment=True, fullText=True, diarization=None):
         request_body = {
-            'language': 'en-US',
-            # 'language': 'ko-KR',
+            # 'language': 'en-US',
+            'language': 'ko-KR',
             'completion': completion,
             'callback': callback,
             'userdata': userdata,
