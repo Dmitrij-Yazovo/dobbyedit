@@ -6,21 +6,109 @@
 <html lang="ko">
 
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
 </head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit</title>
     <link rel="stylesheet" href="{% static 'css/fun.css' %}">
-
+    <link rel="stylesheet" href="{% static 'css/topnavi.css' %}">
     <style>
+        /* Google Web Fonts CDN */
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700,900&display=swap');
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #fff;
+  font-size: 15px;
+  line-height: 1.5em;
+  font-weight: 300;
+  margin: 0;
+  background-color: #222;
+}
+a {
+  color: #222;
+  text-decoration: none;
+}
+
+.items {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+}
+.item {
+  width: 300px;
+  height: 200px;
+  display: inline-block;
+  position: relative;
+  margin: 40px;
+}
+
+.front,
+.back {
+  position: static;
+  transition: 0.5s;
+  top: 0;
+}
+.front {
+  background-color: #333;
+  text-align: center;
+  height: inherit;
+  width: 100%;
+  z-index: 1;
+  border-radius: 5px 5px 0 0;
+}
+.item:hover .front img {
+  animation: ani 1s linear infinite;
+}
+.front h2 {
+  margin-top: 0;
+}
+.back {
+  background-color: #fff;
+  color: #000;
+  text-align: center;
+  padding: 3px;
+  opacity: 0;
+  border-radius: 0 0 5px 5px;
+}
+.back a {
+  background-color: yellowgreen;
+  color: #fff;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+.back a:hover {
+  background-color: #000;
+}
+.item:hover .front {
+  top: -50%;
+}
+.item:hover .back {
+  top: 50%;
+  opacity: 1;
+}
+
+@keyframes ani {
+  0%,100% {
+    transform: scale(0.9)
+  }
+  50% {
+    transform: scale(1.1)
+  }
+}
+
        #modal.modal-overlay {
             width: 100%;
             height: 100%;
-            position: absolute;
+            position: fixed;
             left: 0;
             top: 0;
             display: none;
@@ -89,21 +177,13 @@
         <div class="nv">
             <div class="navleft">
                 <h1>
-                    <a href="{%url 'main:main' %}">DOBBYEDIT</a>
+                    <a href="{%url 'main:main' %}">EDITDOBBY</a>
                 </h1>
             </div>
-            <div class="navright">
-                <li class=nav_item>    
-                    <a href="{%url 'dobby:edit' %}">영상편집</a>
-                </li>
-                <li class="divider"></li>
-                <li class=nav_item>    
-                    <a href="{%url 'main:main' %}">게시판</a>
-                </li>
-                <li class="divider"></li>
-                <li class=nav_item>    
-                    <a href="{%url 'main:my' %}">MY</a>
-                </li>
+            <div class="gnb">
+                    <a href="{%url 'main:main' %}" data-link="Home"></a>
+                    <a href="{%url 'dobby:edit' %}" data-link="영상편집"></a>
+                    <a href="{%url 'board:postlist' %}" data-link="커뮤니티"></a>
             </div>
         </div>
         <div class="title">
@@ -149,25 +229,76 @@
                 LoadingWithMask(mask, loadingImg);
             }
         </script>
-        <div class="fun-button">
+        <div class="items">
             <form action="." method="POST">
                 {% csrf_token %} 
-                    <div class="row1">
+                    <div class="item">
                     {% comment %} <button class="bt1" onclick="location.href='{%url 'main:main' %}'"> {% endcomment %}
-                        <input id="btn" class="bt1" type="submit" name="shorts" value="Shorts 영상 만들기" class="btn btn-success" onclick="loadingDobby();"> 
-                        <input id="btn" class="bt2" type="submit" name="create" value="제목 추천" class="btn btn-success" onclick="loadingDobby();"> 
-                        {% comment %} <input class="bt3" type="submit" name="create" value="자막 넣기" class="btn btn-success">  {% endcomment %}
-                        <input id="btn" class="bt3" type="submit" name="filter" value="비속어 필터링" class="btn btn-success" onclick="loadingDobby();"> 
+                        <div class="front">
+                            <img src="/static/assets/dobby7.png" width="150">
+                            <h2>Shorts 영상 만들기</h2>
+                        </div>
+                        <div class="back">
+                            <p>
+                                <strong>도비가 여러분이 넣은 동영상을 <br> 유튜브 Shorts 영상처럼 만들어줄게요</strong>
+                            </p>
+                            <input id="btn" class="bt1" type="submit" name="shorts" value="양말을 주시겠어요?" class="btn btn-success" onclick="loadingDobby();">
+                        </div>
                     </div>
+                    <div class="item">    
+                        <div class="front">
+                            <img src="/static/assets/dobby7.png" width="150">
+                            <h2>제목 추천</h2>
+                        </div>
+                        <div class="back">
+                            <p>
+                                <strong>도비가 여러분이 넣은 동영상에 <br> 알맞는 제목을 만들어줄게요</strong>
+                            </p>
+                            <input id="btn" class="bt2" type="submit" name="create" value="양말을 주시겠어요?" class="btn btn-success" onclick="loadingDobby();">
+                        </div>
+                    </div>
+                    <div class="item">    
+                        {% comment %} <input class="bt3" type="submit" name="create" value="자막 넣기" class="btn btn-success">  {% endcomment %}
+                        <div class="front">
+                            <img src="/static/assets/dobby7.png" width="150">
+                            <h2>비속어 필터링</h2>
+                        </div>
+                        <div class="back">
+                            <p>
+                                <strong>도비가 여러분이 넣은 동영상에서 <br> 비속어를 삐- 소리로 바꿔줄게요</strong>
+                            </p>
+                            <input id="btn" class="bt3" type="submit" name="filter" value="양말을 주시겠어요?" class="btn btn-success" onclick="loadingDobby();"> 
+                        </div>
+                    </div>     
                 </form>
-                    <div class="row2">
-                        <form class="bt4form" action="." method="POST">
+                    <div class="item">
+                        <form action="." method="POST">
                             {% csrf_token %} 
                         {% comment %} <strong>Shorts 영상 만들기</strong> {% endcomment %}
-                            <input id="btn" class="bt4" type="submit" name="filter" value="썸네일 추천" class="btn btn-success" onclick="loadingDobby();">
-                        </form> 
-                        <button class="bt5" id="btn-modal">자막 넣기</button>
+                            <div class="front">
+                                <img src="/static/assets/dobby7.png" width="150">
+                                <h2>썸네일 추천</h2>
+                            </div>
+                            <div class="back">
+                                <p>
+                                    <strong>도비가 여러분이 넣은 동영상에서 <br> 가장 어울리는 썸네일을 골라줄게요</strong>
+                                </p>
+                                <input id="btn" class="bt4" type="submit" name="filter" value="양말을 주시겠어요?" class="btn btn-success" onclick="loadingDobby();"> 
+                            </div>    
+                        </form>
                     </div>
+                    <div class="item">
+                        <div class="front">
+                            <img src="/static/assets/dobby7.png" width="150">
+                            <h2>자막 생성</h2>
+                        </div>
+                        <div class="back">
+                            <p>
+                                <strong>도비가 여러분이 넣은 동영상에 <br> 자막을 달아 줄게요</strong>
+                            </p>
+                            <button class="bt5" id="btn-modal">양말을 주시겠어요?</button>
+                        </div>
+                    </div>    
         </div>
         <div id="modal" class="modal-overlay">
             <div class="modal-window">
@@ -179,9 +310,9 @@
                         
                         <select class="form-select" name="font" aria-label="Default select example" id="font" onchange="handleOnChange1(this)">
                             <option selected>font</option>
-                            <option value="font1" style="font-size:12pt; font-family: 'Hi Melody', cursive;">Hi Melody</option>
-                            <option value="font2" style="font-size:12pt; font-family: 'East Sea Dokdo', cursive;">East Sea Dokdo</option>
-                            <option value="font3" style="font-size:12pt; font-family: 'Poor Story', cursive;">Poor Story</option>
+                            <option value="font1" style="font-size:12pt; font-family: 'Caveat',cursive;">Caveat</option>
+                            <option value="font2" style="font-size:12pt; font-family: 'Indie Flower', cursive;">IndieFlower</option>
+                            <option value="font3" style="font-size:12pt; font-family: 'Montserrat', sans-serif;">Montserrat</option>
                         </select>
                         <div id='result1'></div>
                         <select class="form-select" name="fontcolor" aria-label="Default select example"id="fontcolor" onchange="handleOnChange2(this)">
@@ -231,7 +362,6 @@
             });
         </script> {% endcomment %}
     </div>
-
     <div class="foot">
         <div class="footleft">
             <h1>
@@ -249,7 +379,7 @@
             <button class="footbtn2" onclick="location.href='{%url 'main:main' %}'">
             </button>
         </div>
-    </div>  
+    </div>     
 </body>
 <script>
     /*const loremIpsum = document.getElementById("lorem-ipsum")
@@ -295,15 +425,15 @@
         console.log(text);
         console.log(1);
 
-        if (text=='Hi Melody'){
+        if (text=='Caveat'){
         document.getElementById('result1').innerHTML
-          = "<span style='font-family: Hi Melody,cursive;'>Hi Melody</span>";
-        }else if(text=='East Sea Dokdo'){
+          = "<span style='font-family: Caveat,cursive;'> Caveat</span>";
+        }else if(text=='IndieFlower'){
             document.getElementById('result1').innerHTML
-          ="<span style='font-family:East Sea Dokdo, cursive;'>East Sea Dokdo</span>";
-        }else if(text=='Poor Story'){
+          ="<span style='font-family:Indie Flower, cursive;'>IndieFlower</span>";
+        }else if(text=='Montserrat'){
             document.getElementById('result1').innerHTML
-          ="<span style='font-family:Poor Story, cursive;'>Poor Story</span>";
+          ="<span style='font-family:Montserrat, sans-serif;'> Montserrat</span>";
         }
       }
       function handleOnChange2(e) { //폰트색
@@ -339,6 +469,7 @@
           ="<span style='color:white'>White</span>";
         }
       }
+
      /* $(document).ready(function() {
         $( "select[name=fontselect]" ).val( "{{ font_text }}" );
         $('select[name=fontselect]').change(function () {
