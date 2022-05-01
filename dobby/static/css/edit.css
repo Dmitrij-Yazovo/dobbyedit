@@ -151,6 +151,12 @@ body{
     overflow: hidden;
 }
 
+.fun input:hover{
+    box-shadow: 0px 4px 4px rgb(110, 80, 41), 13px 10px 15px rgb(110, 80, 41);
+    transform: translate(-2px, -2px);
+    overflow: hidden;
+}
+
 /* footer */
 
 .foot{
