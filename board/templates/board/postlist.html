@@ -138,7 +138,7 @@ body{
         <input type="hidden" id="type" name="type" value="{{type|default_if_none:'all'}}">
         <input type="hidden" id="keyword" name="keyword" value="{{keyword|default_if_none:''}}">
         <input type="hidden" id="page" name="page" value="{{page}}">
-        <p>총 {{post_list.count}}건의 게시글이 있습니다.</p>
+        <p>총 {{count}}건의 게시글이 있습니다.</p>
  
          <select class="form-select" aria-label="Default select example" id="search_type" value="{{type|default_if_none:'all'}}">
             <option value="all">전체</option> 

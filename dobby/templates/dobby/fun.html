@@ -6,9 +6,9 @@
 <html lang="ko">
 
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet">
 </head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -179,9 +179,9 @@
                         
                         <select class="form-select" name="font" aria-label="Default select example" id="font" onchange="handleOnChange1(this)">
                             <option selected>font</option>
-                            <option value="font1" style="font-size:12pt; font-family: 'Caveat',cursive;">Caveat</option>
-                            <option value="font2" style="font-size:12pt; font-family: 'Indie Flower', cursive;">IndieFlower</option>
-                            <option value="font3" style="font-size:12pt; font-family: 'Montserrat', sans-serif;">Montserrat</option>
+                            <option value="font1" style="font-size:12pt; font-family: 'Hi Melody', cursive;">Hi Melody</option>
+                            <option value="font2" style="font-size:12pt; font-family: 'East Sea Dokdo', cursive;">East Sea Dokdo</option>
+                            <option value="font3" style="font-size:12pt; font-family: 'Poor Story', cursive;">Poor Story</option>
                         </select>
                         <div id='result1'></div>
                         <select class="form-select" name="fontcolor" aria-label="Default select example"id="fontcolor" onchange="handleOnChange2(this)">
@@ -295,15 +295,15 @@
         console.log(text);
         console.log(1);
 
-        if (text=='Caveat'){
+        if (text=='Hi Melody'){
         document.getElementById('result1').innerHTML
-          = "<span style='font-family: Caveat,cursive;'> Caveat</span>";
-        }else if(text=='IndieFlower'){
+          = "<span style='font-family: Hi Melody,cursive;'>Hi Melody</span>";
+        }else if(text=='East Sea Dokdo'){
             document.getElementById('result1').innerHTML
-          ="<span style='font-family:Indie Flower, cursive;'>IndieFlower</span>";
-        }else if(text=='Montserrat'){
+          ="<span style='font-family:East Sea Dokdo, cursive;'>East Sea Dokdo</span>";
+        }else if(text=='Poor Story'){
             document.getElementById('result1').innerHTML
-          ="<span style='font-family:Montserrat, sans-serif;'> Montserrat</span>";
+          ="<span style='font-family:Poor Story, cursive;'>Poor Story</span>";
         }
       }
       function handleOnChange2(e) { //폰트색

@@ -9,7 +9,7 @@ from PIL import ImageFont,Image,ImageDraw
 from config.settings import MEDIA_ROOT, STATIC_ROOT
 
 def subtitle_fps(txt_pth, video_pth):
-    res = ClovaSpeechClient().req_upload(file=MEDIA_ROOT + '/' + 'media.mp4', completion='sync')
+    res = ClovaSpeechClient().req_upload(file=video_pth, completion='sync')
     dt = res.json()
     cap1 = cv2.VideoCapture(video_pth)
     fps2 = cap1.get(cv2.CAP_PROP_FPS)
@@ -63,11 +63,11 @@ def subtitle_generator(txt_pth,video_pth,fontnum,font_col_num,font_bg_num):
   font_bg_num = font_bg_num
 
   if fontnum == 1:
-      fontpath = STATIC_ROOT+'\\Caveat-VariableFont_wght.ttf'
+      fontpath = STATIC_ROOT+'\\HiMelody-Regular.ttf'
   elif fontnum == 2:
-      fontpath = STATIC_ROOT+'\\IndieFlower-Regular.ttf'
+      fontpath = STATIC_ROOT+'\\EastSeaDokdo-Regular.ttf'
   elif fontnum == 3:
-      fontpath = STATIC_ROOT+'\\Montserrat-Italic-VariableFont_wght.ttf'
+      fontpath = STATIC_ROOT+'\\PoorStory-Regular.ttf'
 
 #   폰트컬러 흰,검,빨 순
   if font_col_num == 1:
@@ -127,4 +127,4 @@ def combine_audio(video_pth, file_name):
 
     videoclip = videoclip.set_audio(audioclip)  
 
-    videoclip.write_videofile(MEDIA_ROOT+"/result/"+file_name,codec='libx264',audio_codec='aac')
+    videoclip.write_videofile(MEDIA_ROOT+"/subtitle/"+file_name,codec='libx264',audio_codec='aac')

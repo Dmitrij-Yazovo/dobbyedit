@@ -34,7 +34,7 @@ def postlist(request):
     print(page_obj)
 
     count = len(post_list)
-    context = {'post_list': page_obj, 'page': page, 'keyword': search_keyword }
+    context = {'post_list': page_obj, 'page': page, 'keyword': search_keyword , 'count':count }
     
     return render(request, 'board/postlist.html', context)
 

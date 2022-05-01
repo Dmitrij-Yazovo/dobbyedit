@@ -3,11 +3,14 @@ import os
 from urllib import response
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
+import urllib3
 from config import settings
 from config.settings import MEDIA_ROOT
 from dobby.fu_filter import combine_audio2, filter_srt, total_filter
 from django.core.files.storage import FileSystemStorage
 from dobby.subtitle import combine_audio, subtitle_fps, subtitle_generator
+from dobby.summ.demo import demo
+
 from main.models import Member
 from .models import File, Inputfile
 
@@ -37,27 +40,26 @@ def result(request):
     if s_id==None:
         return redirect("/main/login/")
     
-    # if request.method == "POST":
-    #     uploadedFile = request.FILES.get("file")
-    #     save_member_id = Member.objects.get(member_id = request.session['s_id'])
-    #     filename = uploadedFile.name
-    #     file_root = os.path.join(MEDIA_ROOT)
-        
-        
-        
 
-    #     file = File(
-    #         file_name = filename,
-    #         file_root = file_root,
-    #         member_id = save_member_id
-    #     )
-    #     with open(name, 'wb') as file: # 파일 저장
-    #         for chunk in upload_file.chunks():
-    #         file.write(chunk)
-    #     file.save()
-    # else:
-    #     return render(request, "dobby/edit.html")
-    return render(request, "dobby/edit.html")
+    return render(request, 'dobby/result.html')
+
+
+
+def download(request):
+    if request.method == 'POST':
+        fn = request.POST["filename"]
+        filename = request.session.get('file_name')
+        
+        
+        
+        filepath = str(settings.BASE_DIR) + ('/media/%s' % filename.file_name)
+        
+        fn = urllib3.parse.quote(fn.encode('utf-8'))
+        with open(filepath, 'rb') as f:
+            response = HttpResponse(f, content_type='application/octet-stream')
+            response['Content-Disposition'] = 'attachment; filename*=UTF-8\'\'%s' % fn
+    return response
+
 
 
 
@@ -110,7 +112,7 @@ def fun(request):
         elif bgcolor == "bg-color3":
             font_bg_num = 3
         
-        subtitle_fps(txt_pth,video_pth)
+        # subtitle_fps(txt_pth,video_pth)
         subtitle_generator(txt_pth,video_pth,fontnum,font_col_num,font_bg_num)
         combine_audio(video_pth, request.session['file_name'])
         
@@ -118,39 +120,73 @@ def fun(request):
         file_path = str(settings.BASE_DIR) + ('/media/%s' % request.session['file_name'])
         rmv1 = str(settings.BASE_DIR) + ('/media/%s' % 'no_voice.mp4')
         rmv2 = str(settings.BASE_DIR) + ('/media/%s' % 'subtitle.txt')
-        os.remove(file_path)
-        os.remove(rmv1)
-        os.remove(rmv2)
+        # os.remove(file_path)
+        # os.remove(rmv1)
+        # os.remove(rmv2)
         
         now = datetime.datetime.now()
         
         file = File(
             file_name = request.session['file_name'],
             member_id = Member.objects.get(member_id=request.session.get('s_id')),
-            file_root = video_pth,
+            file_root = "\\media\\subtitle\\" + request.session['file_name'],
             file_date = now,
         )
         file.save()
 
     
     elif 'filter' in request.POST:
-        # txt_pth = "C:/Users/User/Desktop/Big-pj/dobbyedit/dobby/static/result.txt"
-        # video_pth = "C:/Users/User/Desktop/Big-pj/dobbyedit/dobby/static/media_ssiba.mp4"
+        txt_pth = MEDIA_ROOT + "\\"+ "result.txt"  # 필터링 음성추출파일 
+        video_pth = MEDIA_ROOT + "\\" + request.session['file_name']
+ 
+        
         # filter_srt(txt_pth,video_pth)
-        # total_filter(txt_pth,video_pth)
-        # audio_pth = "C:/Users/User/Desktop/Big-pj/dobbyedit/dobby/static/one_final.mp3"
-        # combine_audio2(audio_pth,video_pth)
+        total_filter(txt_pth,video_pth)
+        
+        audio_pth =  MEDIA_ROOT + "\\" + "filter_audio.mp3"
+        combine_audio2(audio_pth,video_pth,request.session['file_name'])
+        
         now = datetime.datetime.now()
         
         file = File(
             file_name = request.session['file_name'],
             member_id = Member.objects.get(member_id=request.session.get('s_id')),
-            file_root = video_pth,
+            file_root = "\\media\\filter\\" + request.session['file_name'],
             file_date = now,
         )
         file.save()
+    
+    elif 'shorts' in request.POST: 
+        video_name = request.session['file_name']
+        
+        
+        # filter_srt(txt_pth,video_pth)
+        demo(video_name, 0.1)
+        
+        
+        now = datetime.datetime.now()
+        
+        file = File(
+            file_name = request.session['file_name'],
+            member_id = Member.objects.get(member_id=request.session.get('s_id')),
+            file_root = "\\media\\summary\\" + request.session['file_name'],
+            file_date = now,
+        )
+        file.save()
+        
+    
 
-    return render(request, 'dobby/result.html')
+    return render(request, 'dobby/result.html', {'file':file})
+
+
+
+
+
+
+
+
+
+
                     # # return render(request,"dobby/fun.html")
                     # if request.method == "GET":
                         
