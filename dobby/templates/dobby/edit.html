@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit</title>
     <link rel="stylesheet" href="{% static 'css/edit.css' %}">
+    <link rel="stylesheet" href="{% static 'css/topnavi.css' %}">
 
     <style>
         #modal.modal-overlay {
@@ -73,21 +74,13 @@
         <div class="nv">
             <div class="navleft">
                 <h1>
-                    <a href="{%url 'main:main' %}">DOBBYEDIT</a>
+                    <a href="{%url 'main:main' %}">EDITDOBBY</a>
                 </h1>
             </div>
-            <div class="navright">
-                <li class=nav_item>    
-                    <a href="{%url 'dobby:edit' %}">영상편집</a>
-                </li>
-                <li class="divider"></li>
-                <li class=nav_item>    
-                    <a href="{%url 'main:main' %}">게시판</a>
-                </li>
-                <li class="divider"></li>
-                <li class=nav_item>    
-                    <a href="{%url 'main:my' %}">MY</a>
-                </li>
+            <div class="gnb">
+                    <a href="{%url 'main:main' %}" data-link="Home"></a>
+                    <a href="{%url 'dobby:edit' %}" data-link="영상편집"></a>
+                    <a href="{%url 'board:postlist' %}" data-link="커뮤니티"></a>
             </div>
         </div>
         <div class="title">
