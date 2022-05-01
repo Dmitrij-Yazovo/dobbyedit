@@ -99,16 +99,16 @@
                     <label for="input-file">
                         <strong>동영상을 넣어주세요</strong>
                     </label> 
-                    <form action="{% url 'dobby:edit' %}" method="post" enctype="multipart/form-data">
+                    <form id="send" action="{% url 'dobby:edit' %}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <input type="file" id="input-file" name="e_file" style="display:none;">
-                        <div class='fun'>
-                            <input type="submit" value="전송">
-                        </div>
                     </form>
                 </div>
             </div>
         </div>
+    </div>
+    <div class='fun'>
+        <input type="submit" id="submit" form="send" value="전송">
     </div>
     <div class="foot">
         <div class="footleft">

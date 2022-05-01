@@ -76,7 +76,7 @@ body{
     width: 1400px;
     min-width: 1000px;
     min-height: 700px;
-    height: 800px;
+    height: 400px;
 }
 
 .filebox{
@@ -94,7 +94,7 @@ body{
     align-items: center;
     margin: 0 auto;
     width: 90%;
-    min-height: 300px;
+    min-height: 100px;
 }
 
 .filebox label {
@@ -135,7 +135,7 @@ body{
     border: 0;
 }
 
-.filebox input[type="submit"] {
+.fun input[type="submit"] {
     color: white;
     background-color: rgb(110, 80, 41);
     height: 10vh;
