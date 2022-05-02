@@ -3,7 +3,7 @@ import os
 from urllib import response
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
-import urllib3
+import urllib.parse
 from config import settings
 from config.settings import MEDIA_ROOT
 from dobby.fu_filter import combine_audio2, filter_srt, total_filter
@@ -46,18 +46,17 @@ def result(request):
 
 
 def download(request):
+
+    # 다운로드 문제 - db에서 경로로 비교하여 파일탐색 따라서 같은파일이 2번 들어오면 오류 발생
+    #              - 같은파일이 존재할 시 구분해서 저장할 필요 있음
     if request.method == 'POST':
-        fn = request.POST["filename"]
-        filename = request.session.get('file_name')
-        
-        
-        
-        filepath = str(settings.BASE_DIR) + ('/media/%s' % filename.file_name)
-        
-        fn = urllib3.parse.quote(fn.encode('utf-8'))
-        with open(filepath, 'rb') as f:
-            response = HttpResponse(f, content_type='application/octet-stream')
-            response['Content-Disposition'] = 'attachment; filename*=UTF-8\'\'%s' % fn
+            fn = request.POST["filename"]
+            filename = File.objects.get(file_root = fn)
+            filepath = str(settings.BASE_DIR) + ('%s' % filename.file_root)
+            fn = urllib.parse.quote(fn.encode('utf-8'))
+            with open(filepath, 'rb') as f:
+                response = HttpResponse(f, content_type='application/octet-stream')
+                response['Content-Disposition'] = 'attachment; filename*=UTF-8\'\'%s' % fn
     return response
 
 

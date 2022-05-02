@@ -4,6 +4,10 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
+import urllib3
+from config.settings import STATIC_ROOT
+
+from config import settings
 from .models import Post, Member, Comment, Postfile
 
 # Create your views here.
@@ -74,8 +78,20 @@ def post(request, post_no):
                       {'post':post})
 
 
+def download(request, post_no):
+    if request.method == 'POST':
+        fn = request.POST["filename"]
+        filename = Postfile.objects.filter(post_no = post_no)
+        filepath = str(settings.BASE_DIR) + ('/media/%s' % filename.file_name)
+        fn = urllib3.parse.quote(fn.encode('utf-8'))
+        with open(filepath, 'rb') as f:
+            response = HttpResponse(f, content_type='application/octet-stream')
+            response['Content-Disposition'] = 'attachment; filename*=UTF-8\'\'%s' % fn
+                
+    return redirect('/board/post/'+post_no)
 
-# 작업중
+
+
 def write(request):
     s_id = request.session.get('s_id') # session id 유무 체크
     if s_id==None:
@@ -87,8 +103,6 @@ def write(request):
         save_post_detail = request.POST.get('contents')
         s_id = request.session.get('s_id')
         save_member_id = Member.objects.get(member_id=s_id)
-        # uploadedFile= request.FILES.getlist("image")
-        # save_member_id = 'Member object (test24)'
     
         now = datetime.datetime.now()
         
@@ -99,17 +113,27 @@ def write(request):
             member_id = save_member_id,
         )
         a.save()
-        # for uploadFile in uploadedFile:
-        #     # image_name = 
-        #     i = Postfile(
-        #         image_name=uploadFile.name,
-        #         image_root= "static/media/",
-        #         algo_no=Algorithm.objects.get(algo_update=nowDate))
-        #     i.save()
-        #     save_path = os.path.join(STATIC_ROOT,i.image_name)
-        #     with open(save_path, 'wb') as file:
-        #         for chunk in uploadFile.chunks():
-        #             file.write(chunk)
+        
+        try:
+            uploadedFile= request.FILES.get('up_file')
+            # 파일이 없으면 글 작성
+        except uploadedFile.DoesNotExist:
+            return redirect('/board/postlist/')
+        
+        # 파일이 있으면 파일저장
+        file = Postfile(
+                postfile_name = uploadedFile.name,
+                postfile_root = "\\static\\postfiles\\" + uploadedFile.name,
+                member_id = save_member_id
+            )
+        file.save()
+
+        try:
+            with open(STATIC_ROOT+'\\postfiles\\'+uploadedFile.name, 'wb') as file: 
+                for chunk in uploadedFile.chunks():
+                    file.write(chunk)
+        except FileNotFoundError:
+            file.delete()
             
         # 글이 써지면 목록으로
         return redirect('/board/postlist/')
