@@ -78,6 +78,7 @@ def post(request, post_no):
                       {'post':post})
 
 
+##########################################################
 def download(request, post_no):
     if request.method == 'POST':
         fn = request.POST["filename"]
@@ -89,7 +90,7 @@ def download(request, post_no):
             response['Content-Disposition'] = 'attachment; filename*=UTF-8\'\'%s' % fn
                 
     return redirect('/board/post/'+post_no)
-
+############################################################
 
 
 def write(request):
@@ -114,26 +115,33 @@ def write(request):
         )
         a.save()
         
-        try:
-            uploadedFile= request.FILES.get('up_file')
-            # 파일이 없으면 글 작성
-        except uploadedFile.DoesNotExist:
-            return redirect('/board/postlist/')
         
-        # 파일이 있으면 파일저장
-        file = Postfile(
-                postfile_name = uploadedFile.name,
-                postfile_root = "\\static\\postfiles\\" + uploadedFile.name,
-                member_id = save_member_id
-            )
-        file.save()
+        # 파일 저장 ----- 작업중
+        # try:
+        #     upload_file = request.FILES.get('up_file')
+            
+            
+        #     # 파일이 있으면 파일저장
+        #     file = Postfile(
+        #             postfile_name = upload_file.name,
+        #             postfile_root = "\\static\\postfiles\\" + upload_file.name,
+        #             member_id = save_member_id
+        #         )
+        #     file.save()
 
-        try:
-            with open(STATIC_ROOT+'\\postfiles\\'+uploadedFile.name, 'wb') as file: 
-                for chunk in uploadedFile.chunks():
-                    file.write(chunk)
-        except FileNotFoundError:
-            file.delete()
+        #     try:
+        #         with open(STATIC_ROOT+'\\postfiles\\'+upload_file.name, 'wb') as file: 
+        #             for chunk in upload_file.chunks():
+        #                 file.write(chunk)
+        #     except FileNotFoundError:
+        #         file.delete()
+            
+        #     # 파일이 없으면 글 작성/수정
+        # except upload_file.:
+        #     return redirect('/board/postlist/')
+
+
+
             
         # 글이 써지면 목록으로
         return redirect('/board/postlist/')
@@ -150,6 +158,9 @@ def update(request, post_no):
         return redirect("/main/login/")
     
     post = Post.objects.get(post_no=post_no)
+    #
+    postfile = Postfile.objects.filter(post_no = post_no)
+    #
     if request.method == "POST":
         post.post_title = request.POST['postname']
         post.post_detail = request.POST['contents']

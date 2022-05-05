@@ -152,7 +152,7 @@ body{
     <div class="nv">
         <div class="navleft">
             <h1>
-                <a href="{%url 'main:main' %}">EDITDOBBY</a>
+                <a href="{%url 'main:main' %}"><img src="/static/assets/final_logo.png"style="width:100px; height:100px;"></a>
             </h1>
         </div>
         <div class="gnb">
@@ -196,11 +196,16 @@ body{
         
         Content<br>
         {% if post.post_no %}
-        <textarea rows="50" cols="50" name="contents">{{post.post_no}}</textarea><br>
+        <textarea rows="50" cols="50" name="contents">{{post.post_detail}}</textarea><br>
         {% else %}
         <textarea rows="50" cols="50" name="contents"></textarea><br>
         {% endif %}
-        <input type="file" name="up_file"><br>
+
+        
+        {% comment %} <input type="file" name="up_file"> {% endcomment %}
+        
+
+        <br>
      
         <input type="submit" class="btn btn-secondary" value="POST">
     </form>
