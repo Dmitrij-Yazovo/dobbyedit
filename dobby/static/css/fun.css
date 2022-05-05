@@ -114,6 +114,9 @@ body{
     font-size: 15px;
 }
 
+#filtering {
+    padding-bottom: 20px;
+}
 .bt4form{
     width: 33%;
     margin: 10px;
@@ -195,3 +198,13 @@ button.bt5:hover{
         height: 300px;
     }
 } */
+.btn-primary{
+    color: burlywood;
+    background-color: rgb(73, 54, 27);
+    border-color: rgb(73, 54, 27);
+}
+.btn-primary:hover{
+    color: burlywood;
+    background-color: rgb(52, 38, 19);
+    border-color: rgb(52, 38, 19);
+}

@@ -79,17 +79,17 @@ def post(request, post_no):
 
 
 ##########################################################
-def download(request, post_no):
-    if request.method == 'POST':
-        fn = request.POST["filename"]
-        filename = Postfile.objects.filter(post_no = post_no)
-        filepath = str(settings.BASE_DIR) + ('/media/%s' % filename.file_name)
-        fn = urllib3.parse.quote(fn.encode('utf-8'))
-        with open(filepath, 'rb') as f:
-            response = HttpResponse(f, content_type='application/octet-stream')
-            response['Content-Disposition'] = 'attachment; filename*=UTF-8\'\'%s' % fn
+# def download(request, post_no):
+#     if request.method == 'POST':
+#         fn = request.POST["filename"]
+#         filename = Postfile.objects.filter(post_no = post_no)
+#         filepath = str(settings.BASE_DIR) + ('/media/%s' % filename.file_name)
+#         fn = urllib3.parse.quote(fn.encode('utf-8'))
+#         with open(filepath, 'rb') as f:
+#             response = HttpResponse(f, content_type='application/octet-stream')
+#             response['Content-Disposition'] = 'attachment; filename*=UTF-8\'\'%s' % fn
                 
-    return redirect('/board/post/'+post_no)
+#     return redirect('/board/post/'+post_no)
 ############################################################
 
 

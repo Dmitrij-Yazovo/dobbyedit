@@ -50,8 +50,7 @@ a {
   margin: 40px;
 }
 
-.front,
-.back {
+.front, .back {
   position: static;
   transition: 0.5s;
   top: 0;
@@ -78,12 +77,13 @@ a {
   opacity: 0;
   border-radius: 0 0 5px 5px;
 }
-.back a {
+.back a,.btn-modal {
   background-color: yellowgreen;
   color: #fff;
   padding: 5px 15px;
   border-radius: 20px;
-  font-size: 13px;
+  font-size: 15px;
+  text-align:center;
 }
 .back a:hover {
   background-color: #000;
@@ -132,8 +132,13 @@ a {
             width: 500px;
             height: 500px;
             position: relative;
-            top: -100px;
+            /*top: -100px;*/
             padding: 10px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align:center;
         }
         #modal .title {
             padding-left: 10px;
@@ -167,6 +172,9 @@ a {
       .btn-footer{
           margin-top:30px;
       }
+      .h3,h3{
+          margin-top:30px;
+      }
       
      
     </style>
@@ -177,7 +185,7 @@ a {
         <div class="nv">
             <div class="navleft">
                 <h1>
-                    <a href="{%url 'main:main' %}">EDITDOBBY</a>
+                    <a href="{%url 'main:main' %}"><img src="/static/assets/final_logo.png"style="width:100px; height:100px;"></a>
                 </h1>
             </div>
             <div class="gnb">
@@ -232,73 +240,83 @@ a {
         <div class="items">
             <form action="." method="POST">
                 {% csrf_token %} 
-                    <div class="item">
-                    {% comment %} <button class="bt1" onclick="location.href='{%url 'main:main' %}'"> {% endcomment %}
-                        <div class="front">
-                            <img src="/static/assets/dobby7.png" width="150">
-                            <h2>Shorts 영상 만들기</h2>
-                        </div>
-                        <div class="back">
-                            <p>
-                                <strong>도비가 여러분이 넣은 동영상을 <br> 유튜브 Shorts 영상처럼 만들어줄게요</strong>
-                            </p>
-                            <input id="btn" class="bt1" type="submit" name="shorts" value="양말을 주시겠어요?" class="btn btn-success" onclick="loadingDobby();">
-                        </div>
+                <div class="item">
+                {% comment %} <button class="bt1" onclick="location.href='{%url 'main:main' %}'"> {% endcomment %}
+                    <div class="front">
+                        <img src="/static/assets/dobby7.png" width="150">
+                        <h2>Shorts 영상 만들기</h2>
                     </div>
-                    <div class="item">    
-                        <div class="front">
-                            <img src="/static/assets/dobby7.png" width="150">
-                            <h2>제목 추천</h2>
-                        </div>
-                        <div class="back">
-                            <p>
-                                <strong>도비가 여러분이 넣은 동영상에 <br> 알맞는 제목을 만들어줄게요</strong>
-                            </p>
-                            <input id="btn" class="bt2" type="submit" name="create" value="양말을 주시겠어요?" class="btn btn-success" onclick="loadingDobby();">
-                        </div>
+                    <div class="back">
+                        <p>
+                            <strong>도비가 여러분이 넣은 동영상을 <br> 유튜브 Shorts 영상처럼 만들어줄게요</strong>
+                        </p>
+                        <button id="btn" class="btn-modal" name="shorts" value="양말을 주시겠어요?">양말을 주시겠어요?</button>
+                        {% comment %} <input id="btn" class="bt1" type="submit" name="shorts" value="양말을 주시겠어요?" class="btn btn-success" onclick="loadingDobby();"> {% endcomment %}
                     </div>
-                    <div class="item">    
-                        {% comment %} <input class="bt3" type="submit" name="create" value="자막 넣기" class="btn btn-success">  {% endcomment %}
-                        <div class="front">
-                            <img src="/static/assets/dobby7.png" width="150">
-                            <h2>비속어 필터링</h2>
-                        </div>
-                        <div class="back">
-                            <p>
-                                <strong>도비가 여러분이 넣은 동영상에서 <br> 비속어를 삐- 소리로 바꿔줄게요</strong>
-                            </p>
-                            <input id="btn" class="bt3" type="submit" name="filter" value="양말을 주시겠어요?" class="btn btn-success" onclick="loadingDobby();"> 
-                        </div>
-                    </div>     
-                </form>
-                    <div class="item">
-                        <form action="." method="POST">
-                            {% csrf_token %} 
-                        {% comment %} <strong>Shorts 영상 만들기</strong> {% endcomment %}
-                            <div class="front">
-                                <img src="/static/assets/dobby7.png" width="150">
-                                <h2>썸네일 추천</h2>
-                            </div>
-                            <div class="back">
-                                <p>
-                                    <strong>도비가 여러분이 넣은 동영상에서 <br> 가장 어울리는 썸네일을 골라줄게요</strong>
-                                </p>
-                                <input id="btn" class="bt4" type="submit" name="filter" value="양말을 주시겠어요?" class="btn btn-success" onclick="loadingDobby();"> 
-                            </div>    
-                        </form>
+                </div>
+                <div class="item">    
+                    <div class="front">
+                        <img src="/static/assets/dobby7.png" width="150">
+                        <h2>제목 & 썸네일 추천</h2>
                     </div>
-                    <div class="item">
-                        <div class="front">
-                            <img src="/static/assets/dobby7.png" width="150">
-                            <h2>자막 생성</h2>
-                        </div>
-                        <div class="back">
-                            <p>
-                                <strong>도비가 여러분이 넣은 동영상에 <br> 자막을 달아 줄게요</strong>
-                            </p>
-                            <button class="bt5" id="btn-modal">양말을 주시겠어요?</button>
-                        </div>
+                    <div class="back">
+                        <p>
+                            <strong>도비가 여러분이 넣은 동영상에 <br> 알맞는 제목과 썸네일을 만들어줄게요</strong>
+                        </p>
+                        <input id="btn" class="bt2" type="submit" name="title" value="양말을 주시겠어요?" class="btn btn-success" onclick="loadingDobby();">
+                    </div>
+                </div>
+            </form>
+            <div class="item">
+                <form action="." method="POST">
+                    {% csrf_token %} 
+                    <div class="front" id="filtering">
+                        <img src="/static/assets/dobby7.png" width="150">
+                        <h2>비속어 필터링</h2>
+                    </div>
+                    <div class="back">
+                        <p>
+                            <strong>도비가 여러분이 넣은 동영상에서 <br> 비속어를 삐- 소리로 바꿔줄게요</strong>
+                        </p>
+                        <input id="btn" class="bt3" type="submit" name="filter" value="양말을 주시겠어요?" class="btn btn-success" onclick="loadingDobby();"> 
                     </div>    
+                </form>
+            </div>
+            <div class="item">
+                <div class="front">
+                    <img src="/static/assets/dobby7.png" width="150">
+                    <h2>자막 생성</h2>
+                </div>
+                <div class="back">
+                    <p>
+                        <strong>도비가 여러분이 넣은 동영상에 <br> 자막을 달아 줄게요</strong>
+                    </p>
+                    {% comment %} <button class="bt5" id="btn-modal">양말을 주시겠어요?</button> {% endcomment %}
+                    <button id="btn" class="btn-modal"  value="양말을 주시겠어요?">양말을 주시겠어요?</button>
+                </div>
+            </div>    
+        </div>
+        
+        <div id="modal" class="modal-overlay">
+            <div class="modal-window">
+                <h3>영상 압축 비율을 선택해주세요!</h3 style="margin-top:20px;"> 
+                <select class="form-select" name="ratio" aria-label="Default select example" id="ratio" style="margin:100px;">
+                    <option selected>ratio</option>
+                    <option value="ratio1" style="font-size:12pt;">0.1</option>
+                    <option value="ratio2" style="font-size:12pt;">0.2</option>
+                    <option value="ratio3" style="font-size:12pt;">0.3</option>
+                    <option value="ratio4" style="font-size:12pt;">0.4</option>
+                    <option value="ratio5" style="font-size:12pt;">0.5</option>
+                    <option value="ratio6" style="font-size:12pt;">0.6</option>
+                    <option value="ratio7" style="font-size:12pt;">0.7</option>
+                    <option value="ratio8" style="font-size:12pt;">0.8</option>
+                    <option value="ratio9" style="font-size:12pt;">0.9</option>
+                </select>
+                <div class="btn-footer" style="margin-top:80px">
+                <button type="button" class="btn btn-primary closebtn" data-bs-dismiss="modal">Close</button>
+                <button id="btn" type="submit" name="shorts" class="btn btn-primary" onclick="loadingDobby();">Save changes</button> 
+                </div>
+            </div>          
         </div>
         <div id="modal" class="modal-overlay">
             <div class="modal-window">
@@ -386,6 +404,8 @@ a {
     fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
         .then(response => response.text())
         .then(result => loremIpsum.innerHTML = result)*/
+        
+        /*
     const modal = document.getElementById("modal")
     function modalOn() {
         modal.style.display = "flex"
@@ -415,7 +435,46 @@ a {
         if(isModalOn() && e.key === "Escape") {
             modalOff()
         }
-    })
+    }) */
+
+
+    //멀티모달
+    var modals = document.getElementsByClassName("modal-overlay");
+    var btns = document.getElementsByClassName("btn-modal");
+    var spanes = document.getElementsByClassName("closebtn");
+    var funcs = [];
+
+    function Modal(num) {
+        return function() {
+          // 해당 클래스의 내용을 클릭하면 Modal을 띄웁니다.
+          btns[num].onclick =  function() {
+              modals[num].style.display = "block";
+              console.log(num);
+          };
+       
+          // <span> 태그(X 버튼)를 클릭하면 Modal이 닫습니다.
+          spanes[num].onclick = function() {
+              modals[num].style.display = "none";
+          };
+        };
+      }
+       
+      // 원하는 Modal 수만큼 Modal 함수를 호출해서 funcs 함수에 정의합니다.
+      for(var i = 0; i < btns.length; i++) {
+        funcs[i] = Modal(i);
+      }
+       
+      // 원하는 Modal 수만큼 funcs 함수를 호출합니다.
+      for(var j = 0; j < btns.length; j++) {
+        funcs[j]();
+      }
+       
+      // Modal 영역 밖을 클릭하면 Modal을 닫습니다.
+      window.onclick = function(event) {
+        if (event.target.className == "modal-overlay") {
+            event.target.style.display = "none";
+        }
+      };
 
     function handleOnChange1(e) { //폰트 종류
         // 선택된 데이터의 텍스트값 가져오기
