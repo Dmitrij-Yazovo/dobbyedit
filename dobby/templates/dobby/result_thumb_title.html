@@ -234,10 +234,6 @@ video {
 
         // images from reddit/r/wallpapers
         var urls = [
-                'https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/crayon.jpg',
-                /*'https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/spaceship.jpg',
-                'https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/dj.jpg',
-                'https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/chicken.jpg',*/
                 '/media/jiki.png',
                 '/static/assets/eat.png',
                 '/static/assets/drink.png',
@@ -367,7 +363,6 @@ video {
     }
 
     function shatterCompleteHandler() {
-        // add pooling?
         fragments.forEach(function(f) {
             container.removeChild(f.canvas);
         });

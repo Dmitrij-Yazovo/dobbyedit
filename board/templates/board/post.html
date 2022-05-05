@@ -70,7 +70,7 @@
             </div>
             <div class="post">
                 {% if postfile %}
-                <form action="{% url 'board:post_file_download' post.post_no %}" method="post">
+                {% comment %} <form action="{% url 'board:post_file_download' post.post_no %}" method="post"> {% endcomment %}
                     <i>{{postfile.postfile_name}}</i>
                     
                     
@@ -79,7 +79,7 @@
 
                     {% csrf_token %}
                     <button type="submit" name="filename" value="{{ postfile.postfile_name }}">
-                        ss
+                        다운로드
                     </button>
                 </form>
 

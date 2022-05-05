@@ -164,13 +164,13 @@ def update(request, post_no):
     if request.method == "POST":
         post.post_title = request.POST['postname']
         post.post_detail = request.POST['contents']
-        post.post_update = datetime.now()
+        # post.post_update = datetime.now()
         try:
             post.file = request.FILES['image']
         except:
             post.file = None
         post.save()
-        return redirect('/post/'+str(post.no),{'post':post})
+        return redirect('/board/post/'+str(post.post_no),{'post':post})
     else:
         post=Post.objects.get(post_no = post_no)
         return render(request, 'board/write.html', {'post':post})
@@ -185,7 +185,7 @@ def delete(request, post_no):
     
     post = Post.objects.get(post_no=post_no)
     post.delete()
-    return postlist(request)
+    return redirect("/board/postlist/")
 
 
 

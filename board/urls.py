@@ -17,7 +17,7 @@ urlpatterns = [
     path('post/post/', views.post, name='post'),
     path('post/<int:post_no>/update/',views.update, name="post_update"),
     path('post/<int:post_no>/delete/',views.delete, name="post_delete"),
-    path('post/<int:post_no>/download/',views.download, name="post_file_download"),
+    # path('post/<int:post_no>/download/',views.download, name="post_file_download"),
     
     # 댓글
     path('post/<int:post_no>/comment_write/',views.comment_write, name="comment_write"),

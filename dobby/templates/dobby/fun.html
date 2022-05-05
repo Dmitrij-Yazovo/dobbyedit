@@ -41,6 +41,9 @@ a {
   transform: translate(-50%, -50%);
   width: 100%;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .item {
   width: 300px;
@@ -77,7 +80,7 @@ a {
   opacity: 0;
   border-radius: 0 0 5px 5px;
 }
-.back a,.btn-modal {
+.back a,.btn-modal{
   background-color: yellowgreen;
   color: #fff;
   padding: 5px 15px;
@@ -85,7 +88,8 @@ a {
   font-size: 15px;
   text-align:center;
 }
-.back a:hover {
+
+.btn-modal:hover {
   background-color: #000;
 }
 .item:hover .front {
@@ -238,22 +242,23 @@ a {
             }
         </script>
         <div class="items">
+            
+            <div class="item">
+                {% comment %} <button class="bt1" onclick="location.href='{%url 'main:main' %}'"> {% endcomment %}
+                <div class="front">
+                    <img src="/static/assets/dobby7.png" width="150">
+                    <h2>Shorts 영상 만들기</h2>
+                </div>
+                <div class="back">
+                    <p>
+                        <strong>도비가 여러분이 넣은 동영상을 <br> 유튜브 Shorts 영상처럼 만들어줄게요</strong>
+                    </p>
+                    <button id="btn" class="btn-modal" name="shorts" value="양말을 주시겠어요?">양말을 주시겠어요?</button>
+                    {% comment %} <input id="btn" class="bt1" type="submit" name="shorts" value="양말을 주시겠어요?" class="btn btn-success" onclick="loadingDobby();"> {% endcomment %}
+                </div>
+            </div>
             <form action="." method="POST">
                 {% csrf_token %} 
-                <div class="item">
-                {% comment %} <button class="bt1" onclick="location.href='{%url 'main:main' %}'"> {% endcomment %}
-                    <div class="front">
-                        <img src="/static/assets/dobby7.png" width="150">
-                        <h2>Shorts 영상 만들기</h2>
-                    </div>
-                    <div class="back">
-                        <p>
-                            <strong>도비가 여러분이 넣은 동영상을 <br> 유튜브 Shorts 영상처럼 만들어줄게요</strong>
-                        </p>
-                        <button id="btn" class="btn-modal" name="shorts" value="양말을 주시겠어요?">양말을 주시겠어요?</button>
-                        {% comment %} <input id="btn" class="bt1" type="submit" name="shorts" value="양말을 주시겠어요?" class="btn btn-success" onclick="loadingDobby();"> {% endcomment %}
-                    </div>
-                </div>
                 <div class="item">    
                     <div class="front">
                         <img src="/static/assets/dobby7.png" width="150">
@@ -299,23 +304,26 @@ a {
         
         <div id="modal" class="modal-overlay">
             <div class="modal-window">
-                <h3>영상 압축 비율을 선택해주세요!</h3 style="margin-top:20px;"> 
-                <select class="form-select" name="ratio" aria-label="Default select example" id="ratio" style="margin:100px;">
-                    <option selected>ratio</option>
-                    <option value="ratio1" style="font-size:12pt;">0.1</option>
-                    <option value="ratio2" style="font-size:12pt;">0.2</option>
-                    <option value="ratio3" style="font-size:12pt;">0.3</option>
-                    <option value="ratio4" style="font-size:12pt;">0.4</option>
-                    <option value="ratio5" style="font-size:12pt;">0.5</option>
-                    <option value="ratio6" style="font-size:12pt;">0.6</option>
-                    <option value="ratio7" style="font-size:12pt;">0.7</option>
-                    <option value="ratio8" style="font-size:12pt;">0.8</option>
-                    <option value="ratio9" style="font-size:12pt;">0.9</option>
-                </select>
-                <div class="btn-footer" style="margin-top:80px">
-                <button type="button" class="btn btn-primary closebtn" data-bs-dismiss="modal">Close</button>
-                <button id="btn" type="submit" name="shorts" class="btn btn-primary" onclick="loadingDobby();">Save changes</button> 
-                </div>
+                <form  method="POST"  action="." style="text-align: center;margin-top:40px;">
+                    {% csrf_token %}
+                    <h3>영상 압축 비율을 선택해주세요!</h3 style="margin-top:20px;"> 
+                    <select class="form-select" name="ratio" aria-label="Default select example" id="ratio" style="margin:100px;">
+                        <option selected>ratio</option>
+                        <option value="0.1" style="font-size:12pt;">10%</option>
+                        <option value="0.2" style="font-size:12pt;">20%</option>
+                        <option value="0.3" style="font-size:12pt;">30%</option>
+                        <option value="0.4" style="font-size:12pt;">40%</option>
+                        <option value="0.5" style="font-size:12pt;">50%</option>
+                        <option value="0.6" style="font-size:12pt;">60%</option>
+                        <option value="0.7" style="font-size:12pt;">70%</option>
+                        <option value="0.8" style="font-size:12pt;">80%</option>
+                        <option value="0.9" style="font-size:12pt;">90%</option>
+                    </select>
+                    <div class="btn-footer" style="margin-top:80px">
+                    <button type="button" class="btn btn-primary closebtn" data-bs-dismiss="modal">Close</button>
+                    <button id="btn" type="submit" name="shorts" class="btn btn-primary" onclick="loadingDobby();">Save changes</button> 
+                    </div>
+                </form>
             </div>          
         </div>
         <div id="modal" class="modal-overlay">

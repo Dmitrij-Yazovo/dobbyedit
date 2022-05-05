@@ -173,11 +173,14 @@ def fun(request):
     elif 'shorts' in request.POST: 
         video_name = request.session['file_name']
         video_root = "\\media\\summary\\" + request.session['file_name']
+        rate = request.POST.get("ratio")
+        
         # filter_srt(txt_pth,video_pth)
         
-        extract_features(video_root)
+        # extract_features(video_root)
         
-        demo(video_name, 0.1)
+        print(rate)
+        demo(video_name, rate)
         
         now = datetime.datetime.now()
         
@@ -196,12 +199,12 @@ def fun(request):
     elif 'title' in request.POST:
         video_name = request.session['file_name']
         
-        k_word = imgcap('d')
+        # k_word = imgcap('d')
         
-        title = ''
-        context={
-            'k_word':k_word
-        }
+        # title = ''
+        # context={
+        #     'k_word':k_word
+        # }
         
         return render(request, 'dobby/result_thumb_title.html', context)
 
