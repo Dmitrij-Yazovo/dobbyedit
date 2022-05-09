@@ -1,17 +1,24 @@
 import datetime
+from glob import glob
+import json
+
 import os
 from urllib import response
+import cv2
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 import urllib.parse
+
+from matplotlib.image import thumbnail
 from config import settings
-from config.settings import MEDIA_ROOT, STATIC_ROOT
+from config.settings import BASE_DIR, MEDIA_ROOT, STATIC_ROOT
 from dobby.fu_filter import combine_audio2, filter_srt, total_filter
 from django.core.files.storage import FileSystemStorage
 from dobby.subtitle import combine_audio, subtitle_fps, subtitle_generator
-from dobby.summ.demo import demo
-# from dobby.dbn_img.imgcap import imgcap
+from dobby.summ.demo import demo, demo_title
 from dobby.summ.feature_extract import extract_features, save_img, shot_segmentation
+from dobby.summ.thumbnail_rcmmnd import rcmd_th
+from dobby.imgcap.img_cap import rcmmnd_title, translate_text
 
 from main.models import Member
 from .models import File, Inputfile
@@ -45,14 +52,6 @@ def result(request):
 
     return render(request, 'dobby/result.html')
 
-
-def result_thumb(request):
-    s_id = request.session.get('s_id') # session id 유무 체크
-    if s_id==None:
-        return redirect("/main/login/")
-    
-
-    return render(request, 'dobby/result_thumb_title.html')
 
 
 def download(request):
@@ -121,16 +120,16 @@ def fun(request):
         elif bgcolor == "bg-color3":
             font_bg_num = 3
         
-        # subtitle_fps(txt_pth,video_pth)
+        subtitle_fps(txt_pth,video_pth)
         subtitle_generator(txt_pth,video_pth,fontnum,font_col_num,font_bg_num)
         combine_audio(video_pth, request.session['file_name'])
         
         
         file_path = str(settings.BASE_DIR) + ('/media/%s' % request.session['file_name'])
         rmv1 = str(settings.BASE_DIR) + ('/media/%s' % 'no_voice.mp4')
-        rmv2 = str(settings.BASE_DIR) + ('/media/%s' % 'subtitle.txt')
-        # os.remove(file_path)
-        # os.remove(rmv1)
+        # rmv2 = str(settings.BASE_DIR) + ('/media/%s' % 'subtitle.txt')
+        os.remove(file_path)
+        os.remove(rmv1)
         # os.remove(rmv2)
         
         now = datetime.datetime.now()
@@ -151,7 +150,7 @@ def fun(request):
         video_pth = MEDIA_ROOT + "\\" + request.session['file_name']
  
         
-        # filter_srt(txt_pth,video_pth)
+        filter_srt(txt_pth,video_pth)
         total_filter(txt_pth,video_pth)
         
         audio_pth =  MEDIA_ROOT + "\\" + "filter_audio.mp3"
@@ -173,11 +172,29 @@ def fun(request):
     elif 'shorts' in request.POST: 
         video_name = request.session['file_name']
         video_root = "\\media\\summary\\" + request.session['file_name']
+        duration = "./dobby/summ/data/"+"shots_durations.npy"
         rate = request.POST.get("ratio")
         
-        # filter_srt(txt_pth,video_pth)
+        tmp = "./media/"+video_name
+        img_dir = "./dobby/summ/tmp/"
         
-        # extract_features(video_root)
+        # 테스트코드
+        # video_name = "20220504_120048.mp4"
+        # video_root = "\\media\\summary\\" + "20220504_120048.mp4"
+        # duration = "./dobby/summ/data/"+"shots_durations.npy"
+        # rate = request.POST.get("ratio")
+        
+        # tmp = "./media/"+video_name
+        # img_dir = "./dobby/summ/tmp/"
+        
+        
+        # 20220504_120048.mp4
+        
+        
+        shot_segmentation(tmp)
+        save_img(tmp, duration)
+        extract_features(img_dir)
+        
         
         print(rate)
         demo(video_name, rate)
@@ -198,15 +215,25 @@ def fun(request):
     
     elif 'title' in request.POST:
         video_name = request.session['file_name']
+        duration = "./dobby/summ/data/"+"shots_durations.npy"
         
-        # k_word = imgcap('d')
+        tmp = "./media/"+video_name
+        img_dir = BASE_DIR + "\\dobby\\summ\\tmp\\"
         
-        # title = ''
-        # context={
-        #     'k_word':k_word
-        # }
+        shot_segmentation(tmp)
+        save_img(tmp, duration)
+        extract_features(img_dir)
         
-        return render(request, 'dobby/result_thumb_title.html', context)
+        representative_points = demo_title(video_name, 0.5)
+        imgs = rcmd_th(representative_points, img_dir)
+        
+        
+        context={
+            'imgs':imgs
+        }
+        
+        # return render(request, 'dobby/result_thumb_title.html', context)
+        return redirect("/dobby/result_thumb/")
 
     
     
@@ -217,5 +244,48 @@ def fun(request):
 
 
 
+def result_thumb(request):
+    s_id = request.session.get('s_id') # session id 유무 체크
+    if s_id==None:
+        return redirect("/main/login/")
+    
+    if request.method == 'POST':
+        img_path = request.POST['thumbnail']
+        img='.'+img_path[21:]
+        img_file = img_path
+        print('******'+img)
+        
+        
+        
+        
+        key_list =translate_text(rcmmnd_title(img))
+        context={
+            'img':img,
+            'key_list':key_list,
+            'img_file':img_file
+        }
+        return render(request,'dobby/title_select.html', context)
+    
+    
+    
+    img_files = []
+    k=0
+    for file in sorted(glob(MEDIA_ROOT + "\\thumbnail\\"+ "*.jpg")):
+        img_files.append(file)
+        print(img_files[k])
+        print(k,'###$#$#$$')
+        k=k+1
+        
+    context={
+        'imgs':img_files,
+    }
+    
+    contJson = json.dumps(context)
 
+    return render(request, 'dobby/result_thumb_title.html', {'contJson':contJson})
+
+
+def title_select(request):
+    
+    return render(request, 'dobby/title_select.html')
    

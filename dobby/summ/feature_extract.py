@@ -7,11 +7,12 @@ import re
 
 from config.settings import BASE_DIR, MEDIA_ROOT
 
-def shot_segmentation(video_path='./data/test.mp4'): # 요약할 비디오 파일 경로
-    ouput_file =  BASE_DIR+'\\dobby\\summ\\data\\'+'shot_segmentation.txt' ## 텍스트 파일이 저장될 경로로 텍스트 파일 저장!!!
+def shot_segmentation(video_path): # 요약할 비디오 파일 경로
+    ouput_file = BASE_DIR +'\\dobby\\summ\\data\\'+'shot_segmentation.txt' ## 텍스트 파일이 저장될 경로로 텍스트 파일 저장!!!
     command = 'ffprobe -show_frames -of compact=p=0 -f lavfi "movie=' + video_path + ',select=gt(scene\,.4)" > ' + ouput_file
+    # command = 'ffprobe -show_frames -of compact=p=0 -f lavfi "movie='.\\Cosmus_Laundromat.mp4',select=gt(scene\,.4)" > C:\Users\User\test.txt'
     os.system(command)
-    with open(ouput_file) as f:
+    with open(ouput_file) as f: 
         content = f.readlines()
     shotIdx = [0]
     cap = cv2.VideoCapture(video_path)
@@ -47,10 +48,23 @@ def shot_segmentation(video_path='./data/test.mp4'): # 요약할 비디오 파�
             for j in range(devide_factor - 1):
                 final_C.append(length_of_each_part)
             final_C.append( C_without_short_shots[i] - (devide_factor - 1)*length_of_each_part )
-    return np.save('shot_duration.npy', C)
+    
+    return np.save('./dobby/summ/data/shots_durations.npy', final_C)
 
+
+def DeleteAllFile(filePath):
+    if os.path.exists(filePath):
+        for file in os.scandir(filePath):
+            os.remove(file.path)
+        return 'Remove all tmp files'
+    else:
+        return 'no dir'
+        
 
 def save_img(video_pth,txt_pth):
+    # 이전 사용 파일 삭제
+    DeleteAllFile('./dobby/summ/tmp/')
+    
     cap = cv2.VideoCapture(video_pth)
     duration = np.load(txt_pth) 
     if not cap.isOpened() :
@@ -60,7 +74,8 @@ def save_img(video_pth,txt_pth):
         ret,frame = cap.read()
         if not ret: 
                 break
-        cv2.imwrite(BASE_DIR+'\\dobby\\summ\\data\\tmp\\{}.jpg'.format(cnt), frame) # 이미지가 여기서 저장됩니다!! 여기서 경로를 주면 됩니다!
+        cv2.imwrite('./dobby/summ/tmp/{}.jpg'.format(cnt), frame) # 이미지가 여기서 저장됩니다!! 여기서 경로를 주면 됩니다!
+        print('----------------------------@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@',cnt)
         for i in range(duration[cnt]-1):
             ret,frame = cap.read()
             if not ret: 
@@ -91,7 +106,8 @@ def extract_features(image_dir_name):
         normalized_b_hist =  b_hist / np.sum(b_hist)
 
         features[i,:] = np.concatenate((normalized_r_hist, normalized_g_hist, normalized_b_hist))
-    return np.save('shot_feature.npy', features)
+    print(features.shape,"-----------------")
+    return np.save('./dobby/summ/data/shots_features.npy', features)
 
 def stringSplitByNumbers(x):
     r = re.compile('(\d+)')
@@ -108,3 +124,5 @@ def stringSplitByNumbers(x):
 # shot_segmentation(video_path) # shot_duration.npy저장하는 함수 -> return 에 저장될 경로 같이 주시면 됩니다!
 # save_img(video_path,txt_pth) # 이미지 저장하는 함수 # 나중에 썸네일 이미지를 여기서 추출합니다 
 # extract_features(image_dir_name) #최종적으로 feature를 추출하는 함수! 위에서 저장된 이미지 경로를 주시면 됩니다!
+
+
