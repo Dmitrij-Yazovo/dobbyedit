@@ -98,7 +98,7 @@ body{
     min-height: 300px;
 }
 
-.bt1, .bt2, .bt3, .bt4, .bt5{
+.bt1, .bt2, .bt3, .bt4, .bt5, .btn-modal{
     /*border-style: dotted;*/
     height: 5vh;
     border-radius: 20px;

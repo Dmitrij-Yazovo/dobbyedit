@@ -37,7 +37,7 @@ def filter_audio(start, end, video_pth):
 
     audios.append(filter)
 
-    end_audio = audio.subclip("00:00:{}".format(end),"00:00:58") # 하드코딩
+    end_audio = audio.subclip("00:00:{}".format(end),"00:00:13") # 하드코딩
 
     audios.append(end_audio)
 

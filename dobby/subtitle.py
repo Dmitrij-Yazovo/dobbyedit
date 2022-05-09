@@ -12,8 +12,8 @@ def subtitle_fps(txt_pth, video_pth):
     res = ClovaSpeechClient().req_upload(file=video_pth, completion='sync')
     dt = res.json()
     cap1 = cv2.VideoCapture(video_pth)
-    fps2 = cap1.get(cv2.CAP_PROP_FPS)
-    fps2 = round(fps2) + 2
+    fps2 = cap1.get(cv2.CAP_PROP_FPS) +2
+    fps2 = round(fps2)
     test = dt['segments']
     cnt = 0
     start_point = 0
@@ -22,6 +22,11 @@ def subtitle_fps(txt_pth, video_pth):
         for i in range(len(test)):
             if i == 0 and (test[i]['start']//1000) != 0:
                 cnt = (test[i]['start']//1000)* fps2
+                for j in range(cnt):
+                       f.write(str(" "))
+                       f.write("\n")
+            if i != 0 and i< len(test)-1 and (test[i]['end']//1000)+1 != (test[i+1]['start']//1000):
+                cnt = ((test[i+1]['start']//1000) - (test[i]['end']//1000))* fps2
                 for j in range(cnt):
                        f.write(str(" "))
                        f.write("\n")
@@ -89,7 +94,7 @@ def subtitle_generator(txt_pth,video_pth,fontnum,font_col_num,font_bg_num):
       ret,frame = cap1.read()
       if not ret: 
           break
-      org=(0,620)
+      org=(0,h - 80)
 
       font = ImageFont.truetype(fontpath,32)
       text = file.readline()
@@ -101,7 +106,7 @@ def subtitle_generator(txt_pth,video_pth,fontnum,font_col_num,font_bg_num):
           text = ' '.join(text)
 
       
-      y0, dy = 620, text_size[1]
+      y0, dy = (h - 80), text_size[1]
 
       for i, line in enumerate(text.split('\n')):
         y = y0 + i*dy

@@ -80,7 +80,7 @@ a {
   opacity: 0;
   border-radius: 0 0 5px 5px;
 }
-.back a,.btn-modal{
+.back a {
   background-color: yellowgreen;
   color: #fff;
   padding: 5px 15px;
@@ -90,7 +90,9 @@ a {
 }
 
 .btn-modal:hover {
-  background-color: #000;
+    box-shadow: 0px 4px 4px rgb(110, 80, 41), 13px 10px 15px rgb(110, 80, 41);
+    transform: translate(-2px, -2px);
+    overflow: hidden;
 }
 .item:hover .front {
   top: -50%;
@@ -253,7 +255,7 @@ a {
                     <p>
                         <strong>도비가 여러분이 넣은 동영상을 <br> 유튜브 Shorts 영상처럼 만들어줄게요</strong>
                     </p>
-                    <button id="btn" class="btn-modal" name="shorts" value="양말을 주시겠어요?">양말을 주시겠어요?</button>
+                    <button id="btn" class="btn-modal bt1" name="shorts" value="양말을 주시겠어요?">양말을 주시겠어요?</button>
                     {% comment %} <input id="btn" class="bt1" type="submit" name="shorts" value="양말을 주시겠어요?" class="btn btn-success" onclick="loadingDobby();"> {% endcomment %}
                 </div>
             </div>
@@ -297,7 +299,7 @@ a {
                         <strong>도비가 여러분이 넣은 동영상에 <br> 자막을 달아 줄게요</strong>
                     </p>
                     {% comment %} <button class="bt5" id="btn-modal">양말을 주시겠어요?</button> {% endcomment %}
-                    <button id="btn" class="btn-modal"  value="양말을 주시겠어요?">양말을 주시겠어요?</button>
+                    <button id="btn" class="btn-modal bt3" value="양말을 주시겠어요?">양말을 주시겠어요?</button>
                 </div>
             </div>    
         </div>
@@ -308,7 +310,7 @@ a {
                     {% csrf_token %}
                     <h3>영상 압축 비율을 선택해주세요!</h3 style="margin-top:20px;"> 
                     <select class="form-select" name="ratio" aria-label="Default select example" id="ratio" style="margin:100px;">
-                        <option selected>ratio</option>
+                        <option selected>요약 비율 선택</option>
                         <option value="0.1" style="font-size:12pt;">10%</option>
                         <option value="0.2" style="font-size:12pt;">20%</option>
                         <option value="0.3" style="font-size:12pt;">30%</option>

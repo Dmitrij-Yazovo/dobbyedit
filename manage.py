@@ -18,4 +18,5 @@ def main():
 
 
 if __name__ == '__main__':
+    from dobby.imgcap.img_cap import *
     main()
