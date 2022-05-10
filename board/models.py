@@ -1,14 +1,13 @@
 from django.db import models
-from django.forms import IntegerField
 
 from main.models import Member
 
 # Create your models here.
 class Post(models.Model):
-    post_no	= models.IntegerField(primary_key = True)  
-    member_id =	 models.ForeignKey(Member, on_delete=models.CASCADE, db_column='member_id')
-    post_title = models.CharField(max_length=50)	#varchar(50)	NOT NULL,
-    post_detail = models.CharField(max_length=1000)	#varchar(1000)	NOT NULL,
+    post_no= models.IntegerField(primary_key = True)  
+    member_id = models.ForeignKey(Member, on_delete=models.CASCADE, db_column='member_id')
+    post_title = models.CharField(max_length=50)
+    post_detail = models.CharField(max_length=1000)
     post_update = models.DateField()
 
     class Meta:

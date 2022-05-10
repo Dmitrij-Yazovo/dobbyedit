@@ -4,10 +4,6 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
-import urllib3
-from config.settings import STATIC_ROOT
-
-from config import settings
 from .models import Post, Member, Comment, Postfile
 
 # Create your views here.
@@ -38,7 +34,7 @@ def postlist(request):
     print(page_obj)
 
     count = len(post_list)
-    context = {'post_list': page_obj, 'page': page, 'keyword': search_keyword , 'count':count }
+    context = {'post_list': page_obj, 'page': page, 'keyword': search_keyword , 'count':count}
     
     return render(request, 'board/postlist.html', context)
 

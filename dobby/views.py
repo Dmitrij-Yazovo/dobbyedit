@@ -4,16 +4,14 @@ import json
 
 import os
 from urllib import response
-import cv2
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 import urllib.parse
 
 from matplotlib.image import thumbnail
 from config import settings
-from config.settings import BASE_DIR, MEDIA_ROOT, STATIC_ROOT
+from config.settings import BASE_DIR, MEDIA_ROOT
 from dobby.fu_filter import combine_audio2, filter_srt, total_filter
-from django.core.files.storage import FileSystemStorage
 from dobby.subtitle import combine_audio, subtitle_fps, subtitle_generator
 from dobby.summ.demo import demo, demo_title
 from dobby.summ.feature_extract import extract_features, save_img, shot_segmentation
@@ -21,7 +19,7 @@ from dobby.summ.thumbnail_rcmmnd import rcmd_th
 from dobby.imgcap.img_cap import rcmmnd_title, translate_text
 
 from main.models import Member
-from .models import File, Inputfile
+from .models import File
 
 # Create your views here.
 def edit(request):

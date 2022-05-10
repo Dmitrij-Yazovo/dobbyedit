@@ -50,7 +50,7 @@ def ffprob_shot_segmentation(video_path='data', video_name='Cosmus_Laundromat.mp
             length_of_each_part = C_without_short_shots[i] // devide_factor
             for j in range(devide_factor - 1):
                 final_C.append(length_of_each_part)
-            final_C.append( C_without_short_shots[i] - (devide_factor - 1)*length_of_each_part )
+            final_C.append(C_without_short_shots[i] - (devide_factor - 1)*length_of_each_part)
     return final_C
 
 

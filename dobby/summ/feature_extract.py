@@ -5,10 +5,10 @@ import sys
 import glob
 import re
 
-from config.settings import BASE_DIR, MEDIA_ROOT
+from config.settings import BASE_DIR
 
 def shot_segmentation(video_path): # 요약할 비디오 파일 경로
-    ouput_file = BASE_DIR +'\\dobby\\summ\\data\\'+'shot_segmentation.txt' ## 텍스트 파일이 저장될 경로로 텍스트 파일 저장!!!
+    ouput_file = BASE_DIR +'\\dobby\\summ\\data\\'+'shot_segmentation.txt'
     command = 'ffprobe -show_frames -of compact=p=0 -f lavfi "movie=' + video_path + ',select=gt(scene\,.4)" > ' + ouput_file
     # command = 'ffprobe -show_frames -of compact=p=0 -f lavfi "movie='.\\Cosmus_Laundromat.mp4',select=gt(scene\,.4)" > C:\Users\User\test.txt'
     os.system(command)
@@ -47,7 +47,7 @@ def shot_segmentation(video_path): # 요약할 비디오 파일 경로
             length_of_each_part = C_without_short_shots[i] // devide_factor
             for j in range(devide_factor - 1):
                 final_C.append(length_of_each_part)
-            final_C.append( C_without_short_shots[i] - (devide_factor - 1)*length_of_each_part )
+            final_C.append(C_without_short_shots[i] - (devide_factor - 1)*length_of_each_part)
     
     return np.save('./dobby/summ/data/shots_durations.npy', final_C)
 
@@ -99,11 +99,11 @@ def extract_features(image_dir_name):
         b_values = images[i][:, :, 2].flatten()
 
         r_hist, _ = np.histogram(r_values, BINS_NUMBER_PER_CHANNEL, [0, 256])
-        normalized_r_hist =  r_hist / np.sum(r_hist)
+        normalized_r_hist = r_hist / np.sum(r_hist)
         g_hist, _ = np.histogram(g_values, BINS_NUMBER_PER_CHANNEL, [0, 256])
-        normalized_g_hist =  g_hist / np.sum(g_hist)
+        normalized_g_hist = g_hist / np.sum(g_hist)
         b_hist, _ = np.histogram(b_values, BINS_NUMBER_PER_CHANNEL, [0, 256])
-        normalized_b_hist =  b_hist / np.sum(b_hist)
+        normalized_b_hist = b_hist / np.sum(b_hist)
 
         features[i,:] = np.concatenate((normalized_r_hist, normalized_g_hist, normalized_b_hist))
     print(features.shape,"-----------------")

@@ -15,11 +15,11 @@ def extract_features(image_dir_name):
         b_values = images[i][:, :, 2].flatten()
 
         r_hist, _ = np.histogram(r_values, BINS_NUMBER_PER_CHANNEL, [0, 256])
-        normalized_r_hist =  r_hist / np.sum(r_hist)
+        normalized_r_hist = r_hist / np.sum(r_hist)
         g_hist, _ = np.histogram(g_values, BINS_NUMBER_PER_CHANNEL, [0, 256])
-        normalized_g_hist =  g_hist / np.sum(g_hist)
+        normalized_g_hist = g_hist / np.sum(g_hist)
         b_hist, _ = np.histogram(b_values, BINS_NUMBER_PER_CHANNEL, [0, 256])
-        normalized_b_hist =  b_hist / np.sum(b_hist)
+        normalized_b_hist = b_hist / np.sum(b_hist)
 
         features[i,:] = np.concatenate((normalized_r_hist, normalized_g_hist, normalized_b_hist))
     return features

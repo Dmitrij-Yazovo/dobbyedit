@@ -6,8 +6,6 @@ import scipy.spatial
 import matplotlib.pyplot as plt
 from moviepy.editor import VideoFileClip, concatenate_videoclips
 
-from dobby.summ.feature_extract import shot_segmentation, extract_features, save_img
-from dobby.summ.thumbnail_rcmmnd import rcmd_th
 
 
 from config.settings import MEDIA_ROOT, BASE_DIR
@@ -179,7 +177,7 @@ def Local_Search(X, C, budget, initial_representative_points = None, distance_ma
     best_total_distance = calculate_total_distance(distance_mat, best_representative_points)
 
     for k in range(Local_Search_max_trails):
-        if k%10 == 0:
+        if k % 10 == 0:
             print("Local Search - iteration number: " + str(k))
             print("Total distance: " + str(best_total_distance))
         best_rep_idx, best_point_idx, best_total_distance, IS_LOCAL_DISTANCE_IMPROVED = find_best_improvement_normalized_cost(X, C, budget, distance_mat, best_representative_points, best_total_distance)
@@ -255,7 +253,7 @@ def perturbation(X, C, budget, best_curr_representative_points, M):
         local_best_representative_points = np.copy(best_curr_representative_points)  # stay with the original medoids.
 
     best_curr_representative_points = local_best_representative_points
-    return  best_curr_representative_points
+    return best_curr_representative_points
 
 
 

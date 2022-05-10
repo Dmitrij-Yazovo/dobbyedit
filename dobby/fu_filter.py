@@ -7,8 +7,6 @@ def filter_srt(txt_pth, video_pth):
     res = ClovaSpeechClient().req_upload(file=video_pth, completion='sync')
     dt = res.json()
     test = dt['segments']
-    cnt = 0
-    start_point = 0
     # 파일 저장되는 경로 -> 변경 해줘야함
     with open(txt_pth, 'a') as f:
         for i in range(len(test)):

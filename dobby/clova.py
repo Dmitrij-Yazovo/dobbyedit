@@ -1,7 +1,6 @@
 import requests
 import json
-from fileinput import close
-import io
+
 
 class ClovaSpeechClient:
     # Clova Speech invoke URL

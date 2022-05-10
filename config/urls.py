@@ -16,9 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from config import settings
-from main import views as mainviews
-from dobby import views as dobbyviews
-from board import views as boardviews
 from django.conf.urls.static import static
 
 urlpatterns = [

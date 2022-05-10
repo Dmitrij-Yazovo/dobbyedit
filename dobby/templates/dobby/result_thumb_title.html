@@ -204,7 +204,7 @@ video {
         <form id='form'>
             {% csrf_token %}
             <input type="hidden" value=thumbnail id="thumbnail" name="thumbnail">
-            <input type="submit" id="submit" form="send" value="해시태그" onclick="loadingDobby();">
+            <input type="submit" id="submit" form="send" value="제목 키워드" onclick="loadingDobby();">
         </form>
         <div id='mask' style='position:absolute; z-index:1; display:none; background-color:black; left:0%; top:700px;' >
             <div id='loadingImg' style='display:block;'>
@@ -299,7 +299,7 @@ video {
 
         // images from reddit/r/wallpapers
         var urls = [
-                'https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/crayon.jpg',
+                //'https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/crayon.jpg',
                 /*'https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/spaceship.jpg',
                 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/dj.jpg',
                 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/chicken.jpg',

@@ -1,7 +1,5 @@
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import redirect, render
 from django.utils import timezone
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.hashers import check_password 
 from main.models import Member
 from dobby.models import File
 from django.contrib import messages
@@ -73,4 +71,4 @@ def my(request):
     
     files = File.objects.all()
     
-    return render(request,"main/my.html", {'files':files} )
+    return render(request,"main/my.html", {'files' : files})
