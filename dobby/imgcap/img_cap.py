@@ -6,13 +6,13 @@ import torchvision.models as models
 from torch.nn.utils.rnn import pack_padded_sequence
 from torchvision import transforms
 
-import os
-import sys
+# import os
+# import sys
 import urllib.request
 import json
-import konlpy
+# import konlpy
 from konlpy.tag import *
-from nltk import Text
+# from nltk import Text
 
       
 class Vocabulary(object):

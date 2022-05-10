@@ -155,7 +155,7 @@ def update(request, post_no):
     
     post = Post.objects.get(post_no=post_no)
     #
-    postfile = Postfile.objects.filter(post_no = post_no)
+    # postfile = Postfile.objects.filter(post_no = post_no)
     #
     if request.method == "POST":
         post.post_title = request.POST['postname']

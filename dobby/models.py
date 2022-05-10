@@ -1,7 +1,6 @@
 from django.db import models
 
 from main.models import Member
-from board.models import Post
 
 # Create your models here.
 class File(models.Model):

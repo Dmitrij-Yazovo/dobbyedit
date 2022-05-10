@@ -25,7 +25,7 @@ def filter_audio(start, end, video_pth):
     filter_audio = mp.AudioFileClip(STATIC_ROOT+'\\filter.mp3')
 
     if len(start) < 2:
-       start =  '0' + start
+       start = '0' + start
        print(start)
     start_audio = audio.subclip("00:00:00","00:00:{}".format(start))
 
@@ -43,7 +43,7 @@ def filter_audio(start, end, video_pth):
     audioClips.write_audiofile(MEDIA_ROOT+"\\"+"filter_audio.mp3")
 
 def total_filter(txt_pth, video_pth):
-  with open (txt_pth,encoding='cp949') as f:
+  with open(txt_pth,encoding='cp949') as f:
       while True:
           line = f.readline()
           if not line :

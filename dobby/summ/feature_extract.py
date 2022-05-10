@@ -73,7 +73,7 @@ def save_img(video_pth,txt_pth):
     while True:
         ret,frame = cap.read()
         if not ret: 
-                break
+            break
         cv2.imwrite('./dobby/summ/tmp/{}.jpg'.format(cnt), frame) # 이미지가 여기서 저장됩니다!! 여기서 경로를 주면 됩니다!
         print('----------------------------@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@',cnt)
         for i in range(duration[cnt]-1):

@@ -3,7 +3,6 @@ import sys
 from dobby.clova import ClovaSpeechClient
 import numpy as np
 import moviepy.editor as mp
-import os
 from PIL import ImageFont,Image,ImageDraw
 
 from config.settings import MEDIA_ROOT, STATIC_ROOT
@@ -23,14 +22,14 @@ def subtitle_fps(txt_pth, video_pth):
             if i == 0 and (test[i]['start']//1000) != 0:
                 cnt = (test[i]['start']//1000)* fps2
                 for j in range(cnt):
-                       f.write(str(" "))
-                       f.write("\n")
+                    f.write(str(" "))
+                    f.write("\n")
             if i != 0 and i< len(test)-1 and (test[i]['end']//1000)+1 != (test[i+1]['start']//1000):
                 cnt = ((test[i+1]['start']//1000) - (test[i]['end']//1000))* fps2
                 for j in range(cnt):
-                       f.write(str(" "))
-                       f.write("\n")
-            cnt = ( (test[i]['end']//1000) - (test[i]['start']//1000) )* fps2
+                    f.write(str(" "))
+                    f.write("\n")
+            cnt = ((test[i]['end']//1000) - (test[i]['start']//1000))* fps2
             for j in range(cnt):
                 f.write(str(test[i]['text']))
                 f.write("\n")
@@ -51,12 +50,12 @@ def subtitle_generator(txt_pth,video_pth,fontnum,font_col_num,font_bg_num):
   fourcc = cv2.VideoWriter_fourcc(*"mp4v")
   delay2 = round(1000/fps2)
 
-  out = cv2.VideoWriter(MEDIA_ROOT+"/"+"no_voice.mp4",fourcc,fps2,(w,h)) #출력 동영상(음성x) 저장될 경로
+  out = cv2.VideoWriter(MEDIA_ROOT+"/"+"no_voice.mp4",fourcc,fps2,(w,h))
 
 
 
   fps1 = cap1.get(cv2.CAP_PROP_FPS)
-  delay2 = round(1000/fps1)
+#   delay2 = round(1000/fps1)
 
 
   if not cap1.isOpened() :
