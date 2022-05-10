@@ -1,9 +1,9 @@
-from collections import Counter
+# from collections import Counter
 import torch
 import torch.nn as nn
 import torchvision.models as models
 from torch.nn.utils.rnn import pack_padded_sequence
-from torchvision import transforms
+# from torchvision import transforms
 
 class Vocabulary(object):
     """Simple vocabulary wrapper."""
