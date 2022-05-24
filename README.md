@@ -5,7 +5,8 @@
 <br/>
 
 
-:link: **관련링크** <a href="https://drive.google.com/file/d/1fzgPNdyGTnzvcMkRXTbUQq1-1Dv0BtUc/view?usp=sharing"><img src="https://img.shields.io/badge/Poster-3766AB?style=flat-square&color=blue&link=내링크"/></a>
+:link: **관련링크**
+https://drive.google.com/file/d/1V7E8Nj9tceUOHj4vmLwUs6BUF02zUmPG/view?usp=sharing
 
 <br/>
 
